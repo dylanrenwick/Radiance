@@ -9,10 +9,13 @@ namespace DigiSouls.Component
 {
     public abstract class Component : JsonSerializable
     {
+        [SerializedField]
         public bool Active { get; set; }
         public Component Parent { get; set; }
+        [SerializedField]
         public Transform Transform { get; protected set; }
 
+        [SerializedField]
         protected List<Component> children;
 
         public Component(Component parent = null, Transform transform = null)
@@ -69,11 +72,7 @@ namespace DigiSouls.Component
 
         public override JClass Serialize()
         {
-            var jObj = new JClass(this);
-            jObj.Add("Transform", this.Transform.Serialize());
-            jObj.Add("Children", new JArray(this.children.Select(c => c.Serialize()).ToArray()));
-            jObj.Add("Active", this.Active);
-            return jObj;
+            return new JClass(this);
         }
     }
 }
