@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using DigiSouls.Graphics;
+using DigiSouls.Component;
 using DigiSouls.Component.UI;
 using DigiSouls.Serialization;
 
@@ -15,6 +17,8 @@ namespace DigiSouls
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Scene scene;
         
         public DigiSoulsGame()
         {
@@ -30,19 +34,12 @@ namespace DigiSouls
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            UIPanel game = new UIPanel();
-            game.AddComponent(new UIPanel()).Transform.LocalPosition = new Vector3(2.0f, 3.4f, 1.0f);
-
-            string json = game.Serialize().ToString();
-            Console.WriteLine(json);
-
-            UIPanel deser = Serializer.Deserialize(json) as UIPanel;
-            Console.WriteLine("======================");
-            Console.WriteLine(deser.Serialize().ToString());
-            Console.WriteLine(deser.GetComponent<UIPanel>().Transform.LocalPosition.ToString());
-
             base.Initialize();
+            this.IsMouseVisible = true;
+
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -53,8 +50,17 @@ namespace DigiSouls
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Primitives.Init(spriteBatch);
 
             // TODO: use this.Content to load your game content here
+
+            this.scene = new Scene();
+            var panel = new UIPanel();
+            panel.RectTransform.Rect = new Rectangle(10, 10, 50, 120);
+            panel.Color = new Color(0f, 0f, 0f, 0.6f);
+            this.scene.AddComponent(panel);
+
+            this.scene.Start();
         }
 
         /// <summary>
@@ -76,7 +82,7 @@ namespace DigiSouls
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            this.scene.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -89,7 +95,7 @@ namespace DigiSouls
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            this.scene.Draw(this.spriteBatch, gameTime);
 
             base.Draw(gameTime);
         }

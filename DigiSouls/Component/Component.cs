@@ -13,7 +13,7 @@ namespace DigiSouls.Component
         public Component Parent { get; set; }
         public Transform Transform { get; protected set; }
 
-        private List<Component> children;
+        protected List<Component> children;
 
         public Component(Component parent = null, Transform transform = null)
         {
@@ -48,6 +48,14 @@ namespace DigiSouls.Component
         public void RemoveComponent<T>(T c) where T : Component
         {
             this.children.Remove(c);
+        }
+
+        public virtual void Start()
+        {
+            foreach (Component child in this.children)
+            {
+                child.Start();
+            }
         }
 
         protected virtual Transform CreateTransform(JObject json = null)

@@ -45,11 +45,13 @@
     <Compile Include="Component\Component.cs" />
     <Compile Include="Component\IRenderable.cs" />
     <Compile Include="Component\IUpdatable.cs" />
+    <Compile Include="Component\Scene.cs" />
     <Compile Include="Component\Transform.cs" />
     <Compile Include="Component\UI\RectTransform.cs" />
     <Compile Include="Component\UI\UIComponent.cs" />
     <Compile Include="Component\UI\UIPanel.cs" />
     <Compile Include="DigiSoulsGame.cs" />
+    <Compile Include="Graphics\Primitives.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\JsonSerializable.cs" />

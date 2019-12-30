@@ -13,7 +13,15 @@ namespace DigiSouls.Component.UI
     {
         public Vector2 Size { get; set; }
 
-        public Rectangle Rect => new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)this.Size.X, (int)this.Size.Y);
+        public Rectangle Rect
+        {
+            get => new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)this.Size.X, (int)this.Size.Y);
+            set
+            {
+                this.LocalPosition = new Vector3(value.X, value.Y, this.LocalPosition.Z);
+                this.Size = new Vector2(value.Width, value.Height);
+            }
+        }
 
         public RectTransform(Component parent): base(parent) { }
         public RectTransform(Component parent, JObject json): base(parent, json)
