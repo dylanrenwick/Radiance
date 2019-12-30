@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,12 @@ namespace DigiSouls.Component.UI
             set => this.Transform = value as Transform;
         }
 
-        public UIComponent(Component parent = null): base(parent)
-        { }
+        public UIComponent(Component parent = null): base(parent) { }
+        public UIComponent(JObject json): base(json) { }
 
-        protected override Transform CreateTransform()
+        protected override Transform CreateTransform(JObject json = null)
         {
+            if (json != null) return new RectTransform(this, json);
             return new RectTransform(this);
         }
     }

@@ -38,6 +38,8 @@ namespace DigiSouls
             Console.WriteLine(json);
 
             UIPanel deser = Serializer.Deserialize(json) as UIPanel;
+            Console.WriteLine("======================");
+            Console.WriteLine(deser.Serialize().ToString());
             Console.WriteLine(deser.GetComponent<UIPanel>().Transform.LocalPosition.ToString());
 
             base.Initialize();

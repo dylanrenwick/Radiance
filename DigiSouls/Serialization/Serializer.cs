@@ -6,6 +6,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
+using DigiSouls.Component;
+using Microsoft.Xna.Framework;
+
 namespace DigiSouls.Serialization
 {
     public static class Serializer
@@ -16,6 +19,33 @@ namespace DigiSouls.Serialization
         {
             JObject root = JObject.Parse(json);
             return GetObject(root);
+        }
+
+        public static Vector2 DeserializeVector2(JObject obj)
+        {
+            float x = obj.Value<float>("X");
+            float y = obj.Value<float>("Y");
+            return new Vector2(x, y);
+        }
+
+        public static Vector3 DeserializeVector3(JObject obj)
+        {
+            float x = obj.Value<float>("X");
+            float y = obj.Value<float>("Y");
+            float z = obj.Value<float>("Z");
+            return new Vector3(x, y, z);
+        }
+
+        public static object[] DeserializeArray(JArray arr)
+        {
+            var items = new List<object>();
+
+            foreach(JToken i in arr)
+            {
+                if (i is JObject) items.Add(GetObject(i as JObject));
+            }
+
+            return items.ToArray();
         }
 
         private static Type GetObjectType(JObject obj)

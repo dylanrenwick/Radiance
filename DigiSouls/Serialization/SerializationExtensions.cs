@@ -10,6 +10,14 @@ namespace DigiSouls.Serialization
 {
     public static class SerializationExtensions
     {
+        public static JObject Serialize(this Vector2 v)
+        {
+            var jObj = new JObject();
+            jObj.Add("X", v.X);
+            jObj.Add("Y", v.Y);
+            return jObj;
+        }
+
         public static JObject Serialize(this Vector3 v)
         {
             var jObj = new JObject();

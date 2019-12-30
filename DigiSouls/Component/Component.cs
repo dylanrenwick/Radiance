@@ -22,6 +22,13 @@ namespace DigiSouls.Component
             this.children = new List<Component>();
             this.Transform = transform ?? this.CreateTransform();
         }
+        public Component(JObject obj)
+        {
+            this.Active = obj.Value<bool>("Active");
+            this.Transform = this.CreateTransform(obj["Transform"] as JObject);
+            this.children = Serializer.DeserializeArray(obj["Children"] as JArray).Cast<Component>().ToList();
+            children.ForEach(c => c.Parent = this);
+        }
 
         public T AddComponent<T>(T c) where T : Component
         {
@@ -43,8 +50,12 @@ namespace DigiSouls.Component
             this.children.Remove(c);
         }
 
-        protected virtual Transform CreateTransform()
+        protected virtual Transform CreateTransform(JObject json = null)
         {
+            if (json != null)
+            {
+                return new Transform(this, json);
+            }
             return new Transform(this);
         }
 

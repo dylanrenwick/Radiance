@@ -34,6 +34,12 @@ namespace DigiSouls.Component
         {
             this.Parent = parent;
         }
+        public Transform(Component parent, JObject json)
+        {
+            this.Parent = parent;
+            this.LocalPosition = Serializer.DeserializeVector3(json["Position"] as JObject);
+            this.LocalRotation = json.Value<float>("Rotation");
+        }
 
         public override JClass Serialize()
         {
