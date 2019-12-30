@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using DigiSouls.Graphics;
 using DigiSouls.Component;
 using DigiSouls.Component.UI;
-using DigiSouls.Serialization;
 
 namespace DigiSouls
 {
@@ -51,6 +49,7 @@ namespace DigiSouls
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Primitives.Init(spriteBatch);
+            DigiSouls.Assets.Assets.Content = this.Content;
 
             // TODO: use this.Content to load your game content here
 
