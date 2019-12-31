@@ -14,8 +14,6 @@ namespace DigiSouls.Serialization
 {
     public static class Serializer
     {
-        private static readonly Regex typeRegex = new Regex(@"^{(.*)}:{(.*)}$");
-
         public static object Deserialize(string json)
         {
             JObject root = JObject.Parse(json);
