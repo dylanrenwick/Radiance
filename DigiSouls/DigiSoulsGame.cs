@@ -16,6 +16,8 @@ namespace DigiSouls
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Input input;
+
         Scene scene;
         
         public DigiSoulsGame()
@@ -51,6 +53,8 @@ namespace DigiSouls
             Primitives.Init(spriteBatch);
             DigiSouls.Assets.Assets.Content = this.Content;
 
+            this.input = new Input();
+
             // TODO: use this.Content to load your game content here
 
             this.scene = new Scene();
@@ -80,6 +84,8 @@ namespace DigiSouls
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            input.Update(gameTime);
 
             this.scene.Update(gameTime);
 

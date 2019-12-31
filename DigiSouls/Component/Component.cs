@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 using DigiSouls.Serialization;
+using DigiSouls.Events;
 
 namespace DigiSouls.Component
 {
@@ -59,6 +60,11 @@ namespace DigiSouls.Component
             {
                 child.Start();
             }
+        }
+
+        public virtual void OnClick(MouseEventArgs e)
+        {
+
         }
 
         protected virtual Transform CreateTransform(JObject json = null)

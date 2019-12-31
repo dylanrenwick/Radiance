@@ -54,7 +54,9 @@
     <Compile Include="Component\UI\UIComponent.cs" />
     <Compile Include="Component\UI\UIPanel.cs" />
     <Compile Include="DigiSoulsGame.cs" />
+    <Compile Include="Events\MouseEventArgs.cs" />
     <Compile Include="Graphics\Primitives.cs" />
+    <Compile Include="Input.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\JsonSerializable.cs" />
