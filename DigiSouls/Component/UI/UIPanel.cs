@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DigiSouls.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
 
 using DigiSouls.Graphics;
+using DigiSouls.Serialization;
+
+using Texture2D = DigiSouls.Assets.Texture2D;
 
 namespace DigiSouls.Component.UI
 {
     public class UIPanel : UIComponent, IRenderable
     {
+        [SerializedField]
         public Texture2D Texture;
         public Color Color;
 

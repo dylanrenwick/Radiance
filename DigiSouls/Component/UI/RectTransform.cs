@@ -31,7 +31,7 @@ namespace DigiSouls.Component.UI
 
         public override JClass Serialize()
         {
-            var jObj = base.Serialize();
+            JClass jObj = base.Serialize();
             jObj.Add("Size", this.Size.Serialize());
             return jObj;
         }

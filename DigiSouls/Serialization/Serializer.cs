@@ -6,8 +6,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-using DigiSouls.Component;
+using DigiSouls.Assets;
 using Microsoft.Xna.Framework;
+using System.Reflection;
 
 namespace DigiSouls.Serialization
 {
@@ -59,7 +60,12 @@ namespace DigiSouls.Serialization
             try
             {
                 Type objType = GetObjectType(obj);
-                return Activator.CreateInstance(objType, obj);
+                if (typeof(Asset).IsAssignableFrom(objType))
+                {
+                    MethodInfo deserializeMethod = objType.GetMethods().Where(m => m.IsStatic && m.Name == "Deserialize").FirstOrDefault();
+                    return deserializeMethod.Invoke(null, new object[] { obj["Name"].Value<string>() });
+                }
+                else return Activator.CreateInstance(objType, obj);
             }
             catch (Exception e)
             {

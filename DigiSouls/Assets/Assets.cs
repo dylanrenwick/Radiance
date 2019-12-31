@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using MG_Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 
 namespace DigiSouls.Assets
 {
@@ -16,7 +15,7 @@ namespace DigiSouls.Assets
 
         public static Texture2D LoadTexture2D(string assetPath)
         {
-            if (!texture2Ds.ContainsKey(assetPath)) texture2Ds.Add(assetPath, Load<Texture2D>(assetPath));
+            if (!texture2Ds.ContainsKey(assetPath)) texture2Ds.Add(assetPath, new Texture2D(assetPath, Load<MG_Texture2D>(assetPath)));
             return texture2Ds[assetPath];            
         }
 
