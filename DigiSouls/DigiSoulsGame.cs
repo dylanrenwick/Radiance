@@ -62,6 +62,9 @@ namespace DigiSouls
             panel.Color = new Color(0f, 0f, 0f, 0.6f);
             this.scene.AddComponent(panel);
 
+            this.input.OnMouseButtonDown += this.scene.OnMouseDown;
+            this.input.OnMouseButtonUp += this.scene.OnMouseUp;
+
             this.scene.Start();
         }
 
