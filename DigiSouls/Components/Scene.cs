@@ -4,21 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+
+using DigiSouls.Graphics;
 
 namespace DigiSouls.Components
 
 {
     public class Scene : Component, IUpdatable, IRenderable
     {
-        public void Draw(SpriteBatch sb, GameTime time)
+        public void Draw(RenderContext g, GameTime time)
         {
-            sb.Begin();
+            g.Begin();
             foreach (IRenderable child in this.children.Where(c => c is IRenderable))
             {
-                child.Draw(sb, time);
+                child.Draw(g, time);
             }
-            sb.End();
+            g.End();
         }
 
         public void Update(GameTime time)

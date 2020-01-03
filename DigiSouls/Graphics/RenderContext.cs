@@ -51,6 +51,7 @@ namespace DigiSouls.Graphics
         }
         public void DrawTexture(Texture2D tex, Rectangle destRect, Rectangle? sourceRect, Color color, float rotation, Vector2 scale, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0f)
         {
+            if (tex == null) tex = this.pixel;
             destRect.Location -= this.MainCamera.Position;
             if (!sourceRect.HasValue) sourceRect = new Rectangle(0, 0, tex.Width, tex.Height);
             this.sb.Draw(tex, destRect, sourceRect, color, rotation, scale, spriteEffects, layerDepth);

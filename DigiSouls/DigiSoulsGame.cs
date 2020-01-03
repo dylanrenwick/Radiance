@@ -13,17 +13,16 @@ namespace DigiSouls
     /// </summary>
     public class DigiSoulsGame : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private RenderContext renderContext;
 
-        Input input;
-
-        Scene scene;
+        private Input input;
+        private Scene scene;
         
         public DigiSoulsGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            this.graphics = new GraphicsDeviceManager(this);
+            this.Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -37,9 +36,9 @@ namespace DigiSouls
             base.Initialize();
             this.IsMouseVisible = true;
 
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
-            graphics.ApplyChanges();
+            this.graphics.PreferredBackBufferWidth = 1280;
+            this.graphics.PreferredBackBufferHeight = 720;
+            this.graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -49,8 +48,8 @@ namespace DigiSouls
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            Primitives.Init(spriteBatch);
+            var spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            this.renderContext = new RenderContext(spriteBatch);
             DigiSouls.Assets.Assets.Content = this.Content;
 
             this.input = new Input();
@@ -62,8 +61,6 @@ namespace DigiSouls
             panel.RectTransform.Rect = new Rectangle(10, 10, 50, 120);
             panel.Color = new Color(0f, 0f, 0f, 0.6f);
             this.scene.AddComponent(panel);
-
-            this.input.
 
             this.scene.Start();
         }
@@ -87,7 +84,7 @@ namespace DigiSouls
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            input.Update(gameTime);
+            this.input.Update(gameTime);
 
             this.scene.Update(gameTime);
 
@@ -100,9 +97,9 @@ namespace DigiSouls
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            this.scene.Draw(this.spriteBatch, gameTime);
+            this.scene.Draw(this.renderContext, gameTime);
 
             base.Draw(gameTime);
         }

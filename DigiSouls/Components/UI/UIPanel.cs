@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
 
 using DigiSouls.Graphics;
 using DigiSouls.Serialization;
 
-using Texture2D = DigiSouls.Assets.Texture2D;
+using DigiSouls.Assets;
 
 namespace DigiSouls.Components.UI
 {
@@ -24,10 +23,9 @@ namespace DigiSouls.Components.UI
         public UIPanel() : base() { }
         public UIPanel(JObject json) : base(json) { }
 
-        public void Draw(SpriteBatch sb, GameTime time)
+        public void Draw(RenderContext g, GameTime time)
         {
-            if (this.Texture != null) sb.Draw(this.Texture, this.RectTransform.Rect, this.Color);
-            else sb.FillRectangle(this.RectTransform.Rect, this.Color);
+            g.DrawTexture(this.Texture, this.RectTransform.Rect, this.Color);
         }
 
         public override JClass Serialize()
