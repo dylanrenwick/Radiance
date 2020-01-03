@@ -8,7 +8,8 @@ using Newtonsoft.Json.Linq;
 
 using DigiSouls.Serialization;
 
-namespace DigiSouls.Component
+namespace DigiSouls.Components
+
 {
     public class Transform : JsonSerializable
     {

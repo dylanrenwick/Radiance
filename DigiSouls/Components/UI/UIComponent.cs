@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DigiSouls.Component.UI
+using DigiSouls.Events;
+using Newtonsoft.Json.Linq;
+
+namespace DigiSouls.Components.UI
 {
     public abstract class UIComponent : Component
     {
@@ -23,5 +25,19 @@ namespace DigiSouls.Component.UI
             if (json != null) return new RectTransform(this, json);
             return new RectTransform(this);
         }
+
+        public override void OnMouseDown(MouseEventArgs e)
+        {
+            if (this.RectTransform.Contains(e.Location)) this.OnUIMouseDown(e);
+            base.OnMouseDown(e);
+        }
+        public override void OnMouseUp(MouseEventArgs e)
+        {
+            if (this.RectTransform.Contains(e.Location)) this.OnUIMouseUp(e);
+            base.OnMouseUp(e);
+        }
+
+        public virtual void OnUIMouseDown(MouseEventArgs e) { }
+        public virtual void OnUIMouseUp(MouseEventArgs e) { }
     }
 }

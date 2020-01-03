@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace DigiSouls.Component
+namespace DigiSouls.Components
+
 {
-    public interface IRenderable
+    public interface IUpdatable
     {
-        void Draw(SpriteBatch sb, GameTime time);
+        void Update(GameTime time);
     }
 }

@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using DigiSouls.Serialization;
 using DigiSouls.Events;
 
-namespace DigiSouls.Component
+namespace DigiSouls.Components
 {
     public abstract class Component : JsonSerializable
     {
@@ -62,9 +62,20 @@ namespace DigiSouls.Component
             }
         }
 
-        public virtual void OnClick(MouseEventArgs e)
+        public virtual void OnMouseDown(MouseEventArgs e)
         {
+            foreach (Component child in this.children)
+            {
+                child.OnMouseDown(e);
+            }
+        }
 
+        public virtual void OnMouseUp(MouseEventArgs e)
+        {
+            foreach (Component child in this.children)
+            {
+                child.OnMouseUp(e);
+            }
         }
 
         protected virtual Transform CreateTransform(JObject json = null)

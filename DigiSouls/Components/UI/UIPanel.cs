@@ -13,7 +13,7 @@ using DigiSouls.Serialization;
 
 using Texture2D = DigiSouls.Assets.Texture2D;
 
-namespace DigiSouls.Component.UI
+namespace DigiSouls.Components.UI
 {
     public class UIPanel : UIComponent, IRenderable
     {

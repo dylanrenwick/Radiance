@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DigiSouls.Component.UI
+namespace DigiSouls.Components.UI
 {
     public class RectTransform : Transform
     {
@@ -28,6 +28,9 @@ namespace DigiSouls.Component.UI
         {
             this.Size = Serializer.DeserializeVector2(json["Size"] as JObject);
         }
+
+        public bool Contains(Point p) => this.Rect.Contains(p);
+        public bool Contains(int x, int y) => this.Rect.Contains(x, y);
 
         public override JClass Serialize()
         {

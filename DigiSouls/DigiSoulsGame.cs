@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using DigiSouls.Graphics;
-using DigiSouls.Component;
-using DigiSouls.Component.UI;
+using DigiSouls.Components;
+using DigiSouls.Components.UI;
 
 namespace DigiSouls
 {
@@ -62,6 +62,8 @@ namespace DigiSouls
             panel.RectTransform.Rect = new Rectangle(10, 10, 50, 120);
             panel.Color = new Color(0f, 0f, 0f, 0.6f);
             this.scene.AddComponent(panel);
+
+            this.input.
 
             this.scene.Start();
         }
