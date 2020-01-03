@@ -54,8 +54,6 @@ namespace DigiSouls
 
             this.input = new Input();
 
-            // TODO: use this.Content to load your game content here
-
             this.scene = new Scene();
             var panel = new UIPanel();
             panel.RectTransform.Rect = new Rectangle(10, 10, 50, 120);
