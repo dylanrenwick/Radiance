@@ -66,6 +66,7 @@
     <Compile Include="Serialization\JClass.cs" />
     <Compile Include="Serialization\SerializedField.cs" />
     <Compile Include="Serialization\Serializer.cs" />
+    <Compile Include="Tile\Tilemap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
