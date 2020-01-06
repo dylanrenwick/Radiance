@@ -17,8 +17,9 @@ namespace DigiSouls.Scenes
         public UILabel PercentLabel { get; set; }
 
         private Dictionary<string, Func<Scene>> scenes;
+        private Tuple<string, OriginType>[] textures;
 
-        private int itemCount => scenes.Count;
+        private int itemCount => this.scenes.Count + this.textures.Length;
         private int progress = 0;
         private bool done = false;
         private string statusString;
@@ -29,9 +30,12 @@ namespace DigiSouls.Scenes
         {
             this.scenes = new Dictionary<string, Func<Scene>>
             {
-                { "Main Menu",
-                    () => this.LoadScene(() => SceneBuilder.MainMenu(new Point(50, 300), new Point(150, 50), 20), true)
-                }
+                { "Main Menu", () => this.LoadScene(() => SceneBuilder.MainMenu(new Point(50, 300), new Point(150, 50), 20), true) },
+                { "Main Scene", () => this.LoadScene(() => SceneBuilder.MainScene()) }
+            };
+            this.textures = new Tuple<string, OriginType>[]
+            {
+                new Tuple<string, OriginType>("playerShip1_blue", OriginType.Center)
             };
 
             this.LoadBar.MaxValue = this.itemCount;
@@ -42,18 +46,25 @@ namespace DigiSouls.Scenes
             base.Start();
         }
 
-        public void Update(GameTime time)
+        public void Update(Input input, GameTime time)
         {
             if (this.done) SceneManager.SetActiveScene(this.nextScene);
 
             this.StatusLabel.Text = this.statusString;
-            float percentage = this.progress / this.itemCount;
+            float percentage = (float)this.progress / this.itemCount;
             this.LoadBar.NormalizedValue = percentage;
             this.PercentLabel.Text = $"{Math.Round(percentage * 100)}%";
         }
 
         private void LoadContent()
         {
+            foreach (Tuple<string, OriginType> tex in this.textures)
+            {
+                this.statusString = "Loading Asset: " + tex.Item1;
+                DigiSouls.Assets.Assets.LoadTexture2D(tex.Item1, tex.Item2);
+                this.progress += 1;
+            }
+
             foreach (KeyValuePair<string, Func<Scene>> kvp in this.scenes)
             {
                 this.statusString = "Loading Scene: " + kvp.Key;

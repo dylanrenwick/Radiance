@@ -34,7 +34,7 @@ namespace DigiSouls.Graphics
         public void DrawLine(Point start, Point end, Color color, float thickness = 1f)
         {
             float length = Vector2.Distance(new Vector2(start.X, start.Y), new Vector2(end.X, end.Y));
-            float angle = (float)Math.Atan2(end.Y - start.Y, end.X - start.X);
+            float angle = this.Rad2Deg((float)Math.Atan2(end.Y - start.Y, end.X - start.X));
 
             this.DrawLine(start, length, angle, color, thickness);
         }
@@ -57,6 +57,11 @@ namespace DigiSouls.Graphics
             var destRect = new Rectangle(position, new Point(tex.Width, tex.Height));
             this.DrawTexture(tex, destRect, null, color, 0f, Vector2.One);
         }
+        public void DrawTexture(Texture2D tex, Point position, Color color, float rotation)
+        {
+            var destRect = new Rectangle(position, new Point(tex.Width, tex.Height));
+            this.DrawTexture(tex, destRect, null, color, rotation, Vector2.One);
+        }
         public void DrawTexture(Texture2D tex, Rectangle destRect, Color color)
         {
             this.DrawTexture(tex, destRect, null, color, 0f, Vector2.One);
@@ -67,11 +72,15 @@ namespace DigiSouls.Graphics
             destRect.Location -= this.MainCamera.Position;
             destRect.Size = new Point(-destRect.Width, -destRect.Height);
             if (!sourceRect.HasValue) sourceRect = new Rectangle(0, 0, tex.Width, tex.Height);
-            this.sb.Draw(tex, destRect, sourceRect, color, rotation, scale, spriteEffects, layerDepth);
+            this.sb.Draw(tex, destRect, sourceRect, color, this.Deg2Rad(rotation), scale, spriteEffects, layerDepth);
+        }
+        public void DrawTexture(Texture2D tex, Point position, Color color, float rotation, Point origin)
+        {
+            this.DrawTexture(tex, position, color, rotation, origin, Vector2.One);
         }
         public void DrawTexture(Texture2D tex, Point position, Color color, float angle, Point origin, Vector2 scale, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0f)
         {
-            this.sb.Draw(tex, new Vector2(position.X, position.Y), null, color, angle, new Vector2(origin.X, origin.Y), scale, spriteEffects, layerDepth);
+            this.sb.Draw(tex, new Vector2(position.X, position.Y), null, color, this.Deg2Rad(angle), new Vector2(origin.X, origin.Y), scale, spriteEffects, layerDepth);
         }
 
         public void DrawText(string text, Point position, Color color, int fontSize, Rectangle bounds, TextHoriAlign horiAlign = TextHoriAlign.Left, TextVertAlign vertAlign = TextVertAlign.Bottom)
@@ -118,6 +127,9 @@ namespace DigiSouls.Graphics
 
             this.sb.DrawString(this.Font, text, new Vector2(position.X, position.Y) + vOrigin, color, rotation, Vector2.Zero, scale, spriteEffects, layerDepth);
         }
+
+        private float Rad2Deg(float rad) => rad * (180 / (float)Math.PI);
+        private float Deg2Rad(float deg) => deg / (180 / (float)Math.PI);
     }
 
     public enum TextVertAlign

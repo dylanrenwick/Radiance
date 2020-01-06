@@ -14,9 +14,9 @@ namespace DigiSouls.Assets
         private static Dictionary<string, Texture2D> texture2Ds = new Dictionary<string, Texture2D>();
         private static Dictionary<string, Font> fonts = new Dictionary<string, Font>();
 
-        public static Texture2D LoadTexture2D(string assetPath)
+        public static Texture2D LoadTexture2D(string assetPath, OriginType originType = OriginType.Center)
         {
-            if (!texture2Ds.ContainsKey(assetPath)) texture2Ds.Add(assetPath, new Texture2D(assetPath, Load<MG_Texture2D>(assetPath)));
+            if (!texture2Ds.ContainsKey(assetPath)) texture2Ds.Add(assetPath, new Texture2D(assetPath, Load<MG_Texture2D>(assetPath), originType));
             return texture2Ds[assetPath];            
         }
 
@@ -31,5 +31,14 @@ namespace DigiSouls.Assets
             if (Content == null) throw new Exception("Attempted to load content before Load Content!");
             return Content.Load<T>(assetPath);
         }
+    }
+
+    public enum OriginType
+    {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight,
+        Center
     }
 }
