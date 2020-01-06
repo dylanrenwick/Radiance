@@ -52,7 +52,9 @@ namespace DigiSouls
             var spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.renderContext = new RenderContext(spriteBatch);
             renderContext.MainCamera = new Camera();
+
             DigiSouls.Assets.Assets.Content = this.Content;
+            renderContext.Font = DigiSouls.Assets.Assets.LoadFont("Alchemist");
 
             this.input = new Input();
 
