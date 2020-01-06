@@ -85,7 +85,7 @@ namespace DigiSouls
 
             this.input.Update(gameTime);
 
-            SceneManager.Update(gameTime);
+            SceneManager.Update(this.input, gameTime);
 
             base.Update(gameTime);
         }
