@@ -96,6 +96,7 @@
     <Compile Include="Components\UI\UISlider.cs" />
     <Compile Include="Scenes\GameLoader.cs" />
     <Compile Include="Scenes\LoadScreen.cs" />
+    <Compile Include="Scenes\MainScene.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Components\Transform.cs" />
     <Compile Include="Components\UI\RectTransform.cs" />
@@ -190,6 +191,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
