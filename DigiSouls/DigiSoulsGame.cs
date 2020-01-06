@@ -56,7 +56,8 @@ namespace DigiSouls
             renderContext.MainCamera = new Camera();
 
             DigiSouls.Assets.Assets.Content = this.Content;
-            renderContext.Font = DigiSouls.Assets.Assets.LoadFont("Alchemist");
+            // Load default font
+            renderContext.Font = DigiSouls.Assets.Assets.LoadFont("Arial");
 
             this.input = new Input();
             SceneManager.Input = this.input;
