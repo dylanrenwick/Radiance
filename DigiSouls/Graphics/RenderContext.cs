@@ -28,7 +28,7 @@ namespace DigiSouls.Graphics
             this.pixel.SetData(new Color[] { Color.White });
         }
 
-        public void Begin() => this.sb.Begin();
+        public void Begin() => this.sb.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
         public void End() => this.sb.End();
 
         public void DrawLine(Point start, Point end, Color color, float thickness = 1f)
