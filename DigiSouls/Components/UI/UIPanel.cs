@@ -23,7 +23,7 @@ namespace DigiSouls.Components.UI
         public UIPanel() : base() { }
         public UIPanel(JObject json) : base(json) { }
 
-        public void Draw(RenderContext g, GameTime time)
+        public virtual void Draw(RenderContext g, GameTime time)
         {
             g.DrawTexture(this.Texture, this.RectTransform.Rect, this.Color);
         }

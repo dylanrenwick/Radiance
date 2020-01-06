@@ -14,6 +14,7 @@ namespace DigiSouls.Graphics
         private SpriteBatch sb;
 
         public Camera MainCamera { get; set; }
+        public SpriteFont Font { get; set; }
 
         public GraphicsDevice GraphicsDevice => this.sb.GraphicsDevice;
 
@@ -59,6 +60,11 @@ namespace DigiSouls.Graphics
         public void DrawTexture(Texture2D tex, Point position, Color color, float angle, Point origin, Vector2 scale, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0f)
         {
 
+        }
+
+        public void DrawText(string text, Point position, Color color)
+        {
+            this.sb.DrawString(this.Font, text, new Vector2(position.X, position.Y), color);
         }
     }
 }

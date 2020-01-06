@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using DigiSouls.Scenes;
 using DigiSouls.Graphics;
 using DigiSouls.Components;
 using DigiSouls.Components.UI;
@@ -50,15 +51,12 @@ namespace DigiSouls
             // Create a new SpriteBatch, which can be used to draw textures.
             var spriteBatch = new SpriteBatch(this.GraphicsDevice);
             this.renderContext = new RenderContext(spriteBatch);
+            renderContext.MainCamera = new Camera();
             DigiSouls.Assets.Assets.Content = this.Content;
 
             this.input = new Input();
 
-            this.scene = new Scene();
-            var panel = new UIPanel();
-            panel.RectTransform.Rect = new Rectangle(10, 10, 50, 120);
-            panel.Color = new Color(0f, 0f, 0f, 0.6f);
-            this.scene.AddComponent(panel);
+            this.scene = SceneBuilder.MainMenu(new Point(50, 300), new Point(150, 80), 20);
 
             this.input.OnMouseButtonDown += this.scene.OnMouseDown;
             this.input.OnMouseButtonUp += this.scene.OnMouseUp;

@@ -16,6 +16,6 @@ namespace DigiSouls.Assets
 
         public static Asset Deserialize(string name) => Assets.LoadTexture2D(name);
 
-        public static implicit operator MG_Texture2D(Texture2D tex) => tex.inner;
+        public static implicit operator MG_Texture2D(Texture2D tex) => tex?.inner;
     }
 }
