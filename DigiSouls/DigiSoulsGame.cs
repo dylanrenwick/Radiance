@@ -14,6 +14,8 @@ namespace DigiSouls
     /// </summary>
     public class DigiSoulsGame : Game
     {
+        public static DigiSoulsGame Instance { get; private set; }
+
         private GraphicsDeviceManager graphics;
         private RenderContext renderContext;
 
@@ -34,6 +36,7 @@ namespace DigiSouls
         /// </summary>
         protected override void Initialize()
         {
+            DigiSoulsGame.Instance = this;
             base.Initialize();
             this.IsMouseVisible = true;
 

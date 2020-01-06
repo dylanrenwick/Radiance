@@ -42,13 +42,10 @@ namespace DigiSouls.Components.UI
             g.DrawText(this.Text, new Point((int)this.Transform.Position.X, (int)this.Transform.Position.Y), this.TextColor, 24, this.Rect, this.HorizontalAlign, this.VerticalAlign);
         }
 
-        public override void OnMouseDown(MouseEventArgs e)
+        public override void OnUIMouseUp(MouseEventArgs e)
         {
-            if (this.RectTransform.Contains(e.Location))
-            {
-                this.OnClick?.Invoke(e);
-            }
-            base.OnMouseDown(e);
+            this.OnClick?.Invoke(e);
+            base.OnUIMouseUp(e);
         }
 
         public override void OnUIMouseEnter(MouseEventArgs e)

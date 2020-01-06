@@ -35,6 +35,8 @@ namespace DigiSouls.Scenes
             quitButton.Transform.LocalPosition = new Vector3(buttonPos.X, buttonPos.Y, 0);
             buttonPos.Y += buttonSize.Y + buttonPadding;
 
+            quitButton.OnClick += _ => DigiSoulsGame.Instance.Exit();
+
             mainMenu.AddComponent(playButton);
             mainMenu.AddComponent(quitButton);
 
