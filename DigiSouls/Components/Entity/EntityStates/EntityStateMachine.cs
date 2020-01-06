@@ -21,7 +21,7 @@ namespace DigiSouls.Components.Entity.EntityStates
             this.mainState = mainState;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(Input input, GameTime gameTime)
         {
             if (this.currentState == null) this.currentState = this.mainState;
             this.currentState.Update(gameTime);

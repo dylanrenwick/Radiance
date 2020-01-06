@@ -10,6 +10,6 @@ namespace DigiSouls.Components
 {
     public interface IUpdatable
     {
-        void Update(GameTime time);
+        void Update(Input input, GameTime time);
     }
 }

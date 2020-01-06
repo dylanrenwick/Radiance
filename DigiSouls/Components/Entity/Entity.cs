@@ -23,11 +23,11 @@ namespace DigiSouls.Components.Entity
             this.AddComponent(new EntityStateMachine(mainState));
         }
 
-        public void Update(GameTime time)
+        public void Update(Input input, GameTime time)
         {
             foreach (IUpdatable child in this.children.Where(c => c is IUpdatable))
             {
-                child.Update(time);
+                child.Update(input, time);
             }
         }
     }

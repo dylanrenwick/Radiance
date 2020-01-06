@@ -1,9 +1,4 @@
 ﻿using DigiSouls.Components.Entity.Character;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DigiSouls.Components.Entity.EntityStates.Character
 {
@@ -14,6 +9,7 @@ namespace DigiSouls.Components.Entity.EntityStates.Character
         public Character()
         {
             this.characterBody = new CharacterBody();
+            this.AddComponent(characterBody);
             this.stateMachine = new EntityStateMachine(new CharacterIdleState(this.characterBody));
         }
     }
