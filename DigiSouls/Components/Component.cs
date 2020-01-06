@@ -62,6 +62,14 @@ namespace DigiSouls.Components
             }
         }
 
+        public virtual void Sleep()
+        {
+            foreach (Component child in this.children)
+            {
+                child.Sleep();
+            }
+        }
+
         public virtual void OnMouseDown(MouseEventArgs e)
         {
             foreach (Component child in this.children)

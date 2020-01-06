@@ -19,7 +19,7 @@ namespace DigiSouls.Components.UI
             set => this.Value = value * this.MaxValue;
         }
 
-        public UISlider(float maxValue, float value, Color? fillColor) : base()
+        public UISlider(float maxValue, float value, Color? fillColor = null) : base()
         {
             this.MaxValue = maxValue;
             this.Value = value;

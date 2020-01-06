@@ -20,7 +20,6 @@ namespace DigiSouls
         private RenderContext renderContext;
 
         private Input input;
-        private Scene scene;
         
         public DigiSoulsGame()
         {
@@ -60,14 +59,8 @@ namespace DigiSouls
             renderContext.Font = DigiSouls.Assets.Assets.LoadFont("Alchemist");
 
             this.input = new Input();
-
-            this.scene = SceneBuilder.MainMenu(new Point(50, 300), new Point(150, 50), 20);
-
-            this.input.OnMouseButtonDown += this.scene.OnMouseDown;
-            this.input.OnMouseButtonUp += this.scene.OnMouseUp;
-            this.input.OnMouseMove += this.scene.OnMouseMove;
-
-            this.scene.Start();
+            SceneManager.Input = this.input;
+            SceneManager.SetActiveScene(SceneBuilder.LoadScreen());
         }
 
         /// <summary>
@@ -91,7 +84,7 @@ namespace DigiSouls
 
             this.input.Update(gameTime);
 
-            this.scene.Update(gameTime);
+            SceneManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -104,7 +97,7 @@ namespace DigiSouls
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            this.scene.Draw(this.renderContext, gameTime);
+            SceneManager.Draw(this.renderContext, gameTime);
 
             base.Draw(gameTime);
         }
