@@ -62,6 +62,7 @@ namespace DigiSouls
 
             this.input.OnMouseButtonDown += this.scene.OnMouseDown;
             this.input.OnMouseButtonUp += this.scene.OnMouseUp;
+            this.input.OnMouseMove += this.scene.OnMouseMove;
 
             this.scene.Start();
         }

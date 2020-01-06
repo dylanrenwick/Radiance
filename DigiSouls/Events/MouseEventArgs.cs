@@ -12,6 +12,7 @@ namespace DigiSouls.Events
     {
         public Point Location { get; private set; }
         public Point MouseDelta { get; private set; }
+        public Point OldLocation => Location - MouseDelta;
         public Vector2 LocationVector => new Vector2(this.X, this.Y);
 
         public int X => this.Location.X;

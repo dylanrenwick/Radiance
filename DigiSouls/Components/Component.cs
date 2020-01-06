@@ -78,6 +78,14 @@ namespace DigiSouls.Components
             }
         }
 
+        public virtual void OnMouseMove(MouseEventArgs e)
+        {
+            foreach (Component child in this.children)
+            {
+                child.OnMouseMove(e);
+            }
+        }
+
         protected virtual Transform CreateTransform(JObject json = null)
         {
             if (json != null)

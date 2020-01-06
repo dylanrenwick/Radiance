@@ -14,6 +14,7 @@ namespace DigiSouls
         public delegate void MouseEventHandler(MouseEventArgs args);
         public event MouseEventHandler OnMouseButtonDown;
         public event MouseEventHandler OnMouseButtonUp;
+        public event MouseEventHandler OnMouseMove;
 
         private MouseState previousMouseState;
 
@@ -24,7 +25,13 @@ namespace DigiSouls
 
         public void Update(GameTime gameTime)
         {
+            this.UpdateMouse();
+        }
+
+        private void UpdateMouse()
+        {
             MouseState mouse = Mouse.GetState();
+            if (mouse.Equals(this.previousMouseState)) return;
 
             if (mouse.LeftButton == ButtonState.Pressed)
             {
@@ -36,6 +43,11 @@ namespace DigiSouls
             else if (this.previousMouseState.LeftButton == ButtonState.Pressed)
             {
                 this.OnMouseButtonUp?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
+            }
+
+            if (mouse.Position != this.previousMouseState.Position)
+            {
+                this.OnMouseMove?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
             }
 
             this.previousMouseState = mouse;
