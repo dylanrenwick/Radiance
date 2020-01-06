@@ -19,6 +19,8 @@ namespace DigiSouls
 
         public bool MouseButtonsSwapped { get; private set; }
 
+        public Point MousePosition => Mouse.GetState().Position;
+
         private MouseState previousMouseState;
 
 #if WINDOWS
@@ -39,6 +41,23 @@ namespace DigiSouls
         public void Update(GameTime gameTime)
         {
             this.UpdateMouse();
+        }
+
+        public bool IsKeyDown(Keys key)
+        {
+            KeyboardState kb = Keyboard.GetState();
+            return kb.IsKeyDown(key);
+        }
+
+        public bool IsAnyKeyDown(params Keys[] keys)
+        {
+            KeyboardState kb = Keyboard.GetState();
+            return keys.Any(k => kb.IsKeyDown(k));
+        }
+
+        public bool IsLeftButtonDown()
+        {
+            return this.IsLeftButtonDown(Mouse.GetState());
         }
 
         private void UpdateMouse()
