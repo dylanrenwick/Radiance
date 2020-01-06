@@ -31,6 +31,7 @@ namespace DigiSouls
 #if WINDOWS
             this.MouseButtonsSwapped = GetSystemMetrics(new IntPtr(23)).ToInt32() != 0;
 #elif LINUX
+            // TODO: Add logic to check if buttons are swapped on linux
             this.MouseButtonsSwapped = false;
 #endif
         }
