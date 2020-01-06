@@ -4,8 +4,8 @@ namespace DigiSouls.Components.Entity.EntityStates
 {
     public abstract class EntityState
     {
-        private EntityStateMachine parentMachine;
-        protected Entity parentEntity => this.parentMachine.Entity;
+        public EntityStateMachine ParentMachine { get; set; }
+        protected Entity parentEntity => this.ParentMachine.Entity;
 
         public abstract void Update(GameTime gameTime);
     }

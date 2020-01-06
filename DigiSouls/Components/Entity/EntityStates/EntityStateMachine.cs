@@ -12,18 +12,32 @@ namespace DigiSouls.Components.Entity.EntityStates
     {
         public Entity Entity => (Entity)this.Parent;
 
-        private EntityState mainState;
-        private EntityState currentState;
+        public EntityState MainState { get; set; }
+
+        private EntityState _currentState;
+        private EntityState currentState
+        {
+            get => _currentState;
+            set
+            {
+                _currentState = value;
+                _currentState.ParentMachine = this;
+            }
+        }
 
         public EntityStateMachine() : base() { }
         public EntityStateMachine(EntityState mainState) : base()
         {
-            this.mainState = mainState;
+            this.MainState = mainState;
         }
 
         public void Update(Input input, GameTime gameTime)
         {
-            if (this.currentState == null) this.currentState = this.mainState;
+            if (this.currentState == null)
+            {
+                if (this.MainState == null) return;
+                this.currentState = this.MainState;
+            }
             this.currentState.Update(gameTime);
         }
     }

@@ -9,7 +9,10 @@ namespace DigiSouls.Components.Entity.Character
 {
     public class CharacterBody : Component
     {
-        public Vector2 MoveInputs { get; set; }
-        public Vector2 AimInputs { get; set; }
+        public Vector2? MoveInputs { get; set; }
+        public Vector2? AimInputs { get; set; }
+
+        public float Speed { get; set; }
+        public float TurnSpeed { get; set; }
     }
 }
