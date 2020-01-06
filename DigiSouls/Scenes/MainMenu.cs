@@ -20,7 +20,7 @@ namespace DigiSouls.Scenes
             Point buttonPos = location;
 
             UIButton playButton = new UIButton();
-            playButton.Color = Color.Gray;
+            playButton.Color = new Color(0f, 0f, 0f, 0.3f);
             playButton.TextColor = Color.White;
             playButton.Text = "Play";
             playButton.RectTransform.Size = new Vector2(buttonSize.X, buttonSize.Y);
@@ -28,11 +28,12 @@ namespace DigiSouls.Scenes
             buttonPos.Y += buttonSize.Y + buttonPadding;
 
             UIButton quitButton = new UIButton();
-            quitButton.Color = Color.Gray;
+            quitButton.Color = new Color(0f, 0f, 0f, 0.3f);
             quitButton.TextColor = Color.White;
             quitButton.Text = "Quit";
             quitButton.RectTransform.Size = new Vector2(buttonSize.X, buttonSize.Y);
             quitButton.Transform.LocalPosition = new Vector3(buttonPos.X, buttonPos.Y, 0);
+            buttonPos.Y += buttonSize.Y + buttonPadding;
 
             mainMenu.AddComponent(playButton);
             mainMenu.AddComponent(quitButton);

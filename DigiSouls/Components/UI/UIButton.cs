@@ -19,11 +19,21 @@ namespace DigiSouls.Components.UI
         public string Text { get; set; }
         [SerializedField]
         public Color TextColor { get; set; }
+        [SerializedField]
+        public TextHoriAlign HorizontalAlign { get; set; }
+        [SerializedField]
+        public TextVertAlign VerticalAlign { get; set; }
+
+        public UIButton() : base()
+        {
+            this.HorizontalAlign = TextHoriAlign.Middle;
+            this.VerticalAlign = TextVertAlign.Middle;
+        }
 
         public override void Draw(RenderContext g, GameTime time)
         {
             base.Draw(g, time);
-            g.DrawText(this.Text, new Point((int)this.Transform.Position.X, (int)this.Transform.Position.Y), this.TextColor);
+            g.DrawText(this.Text, new Point((int)this.Transform.Position.X, (int)this.Transform.Position.Y), this.TextColor, 24, this.RectTransform.Rect, this.HorizontalAlign, this.VerticalAlign);
         }
 
         public override void OnMouseDown(MouseEventArgs e)
