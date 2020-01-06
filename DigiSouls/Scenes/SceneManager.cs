@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 
@@ -19,9 +20,9 @@ namespace DigiSouls.Scenes
             SceneManager.ActiveScene.Draw(g, gameTime);
         }
 
-        public static void Update(GameTime gameTime)
+        public static void Update(Input input, GameTime gameTime)
         {
-            SceneManager.ActiveScene.Update(gameTime);
+            SceneManager.ActiveScene.Update(input, gameTime);
         }
 
         public static void AddScene(Scene s)
@@ -48,6 +49,12 @@ namespace DigiSouls.Scenes
             SceneManager.Input.OnMouseMove += SceneManager.ActiveScene.OnMouseMove;
 
             SceneManager.ActiveScene.Start();
+        }
+
+        public static void SetActiveScene(string name)
+        {
+            Scene foundScene = SceneManager.scenes.Where(s => s.Name == name).FirstOrDefault();
+            if (foundScene != null) SceneManager.SetActiveScene(foundScene);
         }
     }
 }

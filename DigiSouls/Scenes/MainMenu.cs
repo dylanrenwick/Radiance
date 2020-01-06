@@ -15,7 +15,7 @@ namespace DigiSouls.Scenes
     {
         public static Scene MainMenu(Point location, Point buttonSize, int buttonPadding)
         {
-            Scene mainMenu = new Scene();
+            Scene mainMenu = new Scene("MainMenu");
 
             Point buttonPos = location;
 
@@ -32,6 +32,8 @@ namespace DigiSouls.Scenes
             playButton.RectTransform.Size = new Vector2(buttonSize.X, buttonSize.Y);
             playButton.Transform.LocalPosition = new Vector3(buttonPos.X, buttonPos.Y, 0);
             buttonPos.Y += buttonSize.Y + buttonPadding;
+
+            playButton.OnClick += _ => SceneManager.SetActiveScene("MainScene");
 
             UIButton quitButton = new UIButton();
             quitButton.Color = new Color(0f, 0f, 0f, 0.3f);

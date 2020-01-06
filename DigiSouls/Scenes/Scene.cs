@@ -12,6 +12,13 @@ namespace DigiSouls.Scenes
 {
     public class Scene : Component, IUpdatable, IRenderable
     {
+        public string Name { get; private set; }
+
+        public Scene(string name) : base()
+        {
+            this.Name = name;
+        }
+
         public void Draw(RenderContext g, GameTime time)
         {
             g.Begin();

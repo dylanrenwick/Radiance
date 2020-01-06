@@ -8,7 +8,7 @@ namespace DigiSouls.Scenes
     {
         public static Scene LoadScreen()
         {
-            Scene loadScreen = new Scene();
+            Scene loadScreen = new Scene("LoadScreen");
 
             UISlider loadBar = new UISlider(1, 0, Color.Yellow);
             loadBar.RectTransform.Rect = new Rectangle(50, 600, 1180, 35);
