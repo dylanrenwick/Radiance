@@ -9,7 +9,6 @@ using DigiSouls.Graphics;
 using DigiSouls.Components;
 
 namespace DigiSouls.Scenes
-
 {
     public class Scene : Component, IUpdatable, IRenderable
     {

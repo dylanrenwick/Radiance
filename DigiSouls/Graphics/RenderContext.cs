@@ -54,12 +54,13 @@ namespace DigiSouls.Graphics
         {
             if (tex == null) tex = this.pixel;
             destRect.Location -= this.MainCamera.Position;
+            destRect.Size = new Point(-destRect.Width, -destRect.Height);
             if (!sourceRect.HasValue) sourceRect = new Rectangle(0, 0, tex.Width, tex.Height);
             this.sb.Draw(tex, destRect, sourceRect, color, rotation, scale, spriteEffects, layerDepth);
         }
         public void DrawTexture(Texture2D tex, Point position, Color color, float angle, Point origin, Vector2 scale, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0f)
         {
-
+            this.sb.Draw(tex, new Vector2(position.X, position.Y), null, color, angle, new Vector2(origin.X, origin.Y), scale, spriteEffects, layerDepth);
         }
 
         public void DrawText(string text, Point position, Color color)

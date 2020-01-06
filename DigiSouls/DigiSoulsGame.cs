@@ -58,7 +58,7 @@ namespace DigiSouls
 
             this.input = new Input();
 
-            this.scene = SceneBuilder.MainMenu(new Point(50, 300), new Point(150, 80), 20);
+            this.scene = SceneBuilder.MainMenu(new Point(50, 300), new Point(150, 50), 20);
 
             this.input.OnMouseButtonDown += this.scene.OnMouseDown;
             this.input.OnMouseButtonUp += this.scene.OnMouseUp;

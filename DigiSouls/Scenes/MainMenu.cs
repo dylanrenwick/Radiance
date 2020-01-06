@@ -30,7 +30,7 @@ namespace DigiSouls.Scenes
             UIButton quitButton = new UIButton();
             quitButton.Color = Color.Gray;
             quitButton.TextColor = Color.White;
-            quitButton.Text = "Play";
+            quitButton.Text = "Quit";
             quitButton.RectTransform.Size = new Vector2(buttonSize.X, buttonSize.Y);
             quitButton.Transform.LocalPosition = new Vector3(buttonPos.X, buttonPos.Y, 0);
 
