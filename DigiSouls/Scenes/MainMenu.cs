@@ -19,6 +19,12 @@ namespace DigiSouls.Scenes
 
             Point buttonPos = location;
 
+            UILabel title = new UILabel();
+            title.Text = "DigiSouls";
+            title.FontSize = 72;
+            title.Color = Color.White;
+            title.RectTransform.Rect = new Rectangle(50, 50, 1000, 150);
+
             UIButton playButton = new UIButton();
             playButton.Color = new Color(0f, 0f, 0f, 0.3f);
             playButton.TextColor = Color.White;
@@ -37,6 +43,7 @@ namespace DigiSouls.Scenes
 
             quitButton.OnClick += _ => DigiSoulsGame.Instance.Exit();
 
+            mainMenu.AddComponent(title);
             mainMenu.AddComponent(playButton);
             mainMenu.AddComponent(quitButton);
 
