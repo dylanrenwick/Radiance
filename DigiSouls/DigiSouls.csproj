@@ -90,6 +90,7 @@
     <Compile Include="Components\Entity\EntityStates\EntityStateMachine.cs" />
     <Compile Include="Components\IRenderable.cs" />
     <Compile Include="Components\IUpdatable.cs" />
+    <Compile Include="Components\PlayerInput.cs" />
     <Compile Include="Components\UI\UIButton.cs" />
     <Compile Include="Components\UI\UILabel.cs" />
     <Compile Include="Components\UI\UISlider.cs" />
