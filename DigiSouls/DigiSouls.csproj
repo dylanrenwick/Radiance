@@ -82,6 +82,12 @@
     <Compile Include="Assets\Font.cs" />
     <Compile Include="Assets\Texture2D.cs" />
     <Compile Include="Components\Component.cs" />
+    <Compile Include="Components\Entity\Character\CharacterBody.cs" />
+    <Compile Include="Components\Entity\Entity.cs" />
+    <Compile Include="Components\Entity\EntityStates\Character\Character.cs" />
+    <Compile Include="Components\Entity\EntityStates\Character\CharacterIdleState.cs" />
+    <Compile Include="Components\Entity\EntityStates\EntityState.cs" />
+    <Compile Include="Components\Entity\EntityStates\EntityStateMachine.cs" />
     <Compile Include="Components\IRenderable.cs" />
     <Compile Include="Components\IUpdatable.cs" />
     <Compile Include="Components\UI\UIButton.cs" />
