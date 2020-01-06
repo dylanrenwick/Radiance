@@ -31,6 +31,8 @@ namespace DigiSouls.Components
         public Vector3 Position => this.ParentTransform == null ? this.LocalPosition : this.ParentTransform.Position + this.LocalPosition;
         public float Rotation => this.ParentTransform == null ? this.LocalRotation : this.ParentTransform.Rotation + this.LocalRotation;
 
+        public Point PointPosition => new Point((int)this.Position.X, (int)this.Position.Y);
+
         public Transform(Component parent)
         {
             this.Parent = parent;
