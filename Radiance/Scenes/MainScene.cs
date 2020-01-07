@@ -18,7 +18,7 @@ namespace Radiance.Scenes
             cb.TurnSpeed = 15f;
             player.AddComponent(new PlayerInput(cb));
             player.Transform.LocalPosition = new Vector3(100, 100, 0);
-            player.Sprite = Radiance.Assets.Assets.LoadTexture2D("playerShip1_blue");
+            player.Sprite = Radiance.Assets.AssetManager.LoadTexture2D("playerShip1_blue");
 
             newScene.AddComponent(player);
 

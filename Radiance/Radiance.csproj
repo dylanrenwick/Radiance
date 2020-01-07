@@ -78,7 +78,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Asset.cs" />
-    <Compile Include="Assets\Assets.cs" />
+    <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Font.cs" />
     <Compile Include="Assets\Texture2D.cs" />
     <Compile Include="Components\Component.cs" />

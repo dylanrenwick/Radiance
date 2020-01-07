@@ -61,7 +61,7 @@ namespace Radiance.Scenes
             foreach (Tuple<string, OriginType> tex in this.textures)
             {
                 this.statusString = "Loading Asset: " + tex.Item1;
-                Radiance.Assets.Assets.LoadTexture2D(tex.Item1, tex.Item2);
+                Radiance.Assets.AssetManager.LoadTexture2D(tex.Item1, tex.Item2);
                 this.progress += 1;
             }
 

@@ -7,7 +7,7 @@ using MG_Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 
 namespace Radiance.Assets
 {
-    public static class Assets
+    public static class AssetManager
     {
         public static ContentManager Content;
 

@@ -17,7 +17,7 @@ namespace Radiance.Assets
             this.inner = inner;
         }
 
-        public static Asset Deserialize(string name) => Assets.LoadFont(name);
+        public static Asset Deserialize(string name) => AssetManager.LoadFont(name);
 
         public static implicit operator SpriteFont(Font f) => f?.inner;
     }

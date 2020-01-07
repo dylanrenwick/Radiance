@@ -55,9 +55,9 @@ namespace Radiance
             this.renderContext = new RenderContext(spriteBatch);
             renderContext.MainCamera = new Camera();
 
-            Radiance.Assets.Assets.Content = this.Content;
+            Radiance.Assets.AssetManager.Content = this.Content;
             // Load default font
-            renderContext.Font = Radiance.Assets.Assets.LoadFont("Arial");
+            renderContext.Font = Radiance.Assets.AssetManager.LoadFont("Arial");
 
             this.input = new Input();
             SceneManager.Input = this.input;
