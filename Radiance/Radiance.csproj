@@ -102,7 +102,7 @@
     <Compile Include="Components\UI\RectTransform.cs" />
     <Compile Include="Components\UI\UIComponent.cs" />
     <Compile Include="Components\UI\UIPanel.cs" />
-    <Compile Include="DigiSoulsGame.cs" />
+    <Compile Include="RadianceGame.cs" />
     <Compile Include="Events\MouseEventArgs.cs" />
     <Compile Include="Graphics\Camera.cs" />
     <Compile Include="Graphics\RenderContext.cs" />
