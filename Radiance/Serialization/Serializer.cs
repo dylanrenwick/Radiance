@@ -1,73 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+﻿using System.IO;
 
-using Radiance.Assets;
-using Microsoft.Xna.Framework;
-using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Radiance.Serialization
 {
     public static class Serializer
     {
-        public static object Deserialize(string json)
+        private readonly static JsonSerializerSettings serializationSettings = new JsonSerializerSettings
         {
-            JObject root = JObject.Parse(json);
-            return GetObject(root);
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+        };
+
+        public static string SerializeObject(object obj)
+        {
+            return JsonConvert.SerializeObject(obj, Serializer.serializationSettings);
         }
 
-        public static Vector2 DeserializeVector2(JObject obj)
+        public static void SerializeObjectToFile(object obj, string filePath)
         {
-            float x = obj.Value<float>("X");
-            float y = obj.Value<float>("Y");
-            return new Vector2(x, y);
-        }
-
-        public static Vector3 DeserializeVector3(JObject obj)
-        {
-            float x = obj.Value<float>("X");
-            float y = obj.Value<float>("Y");
-            float z = obj.Value<float>("Z");
-            return new Vector3(x, y, z);
-        }
-
-        public static object[] DeserializeArray(JArray arr)
-        {
-            var items = new List<object>();
-
-            foreach(JToken i in arr)
+            using (StreamWriter file = File.CreateText(filePath))
             {
-                if (i is JObject) items.Add(GetObject(i as JObject));
-            }
-
-            return items.ToArray();
-        }
-
-        private static Type GetObjectType(JObject obj)
-        {
-            string typeString = obj["__ClassType"].ToString();
-            return Type.GetType(typeString);
-        }
-
-        private static object GetObject(JObject obj)
-        {
-            try
-            {
-                Type objType = GetObjectType(obj);
-                if (typeof(Asset).IsAssignableFrom(objType))
-                {
-                    MethodInfo deserializeMethod = objType.GetMethods().Where(m => m.IsStatic && m.Name == "Deserialize").FirstOrDefault();
-                    return deserializeMethod.Invoke(null, new object[] { obj["Name"].Value<string>() });
-                }
-                else return Activator.CreateInstance(objType, obj);
-            }
-            catch (Exception e)
-            {
-                throw new SerializationException(obj, $"Could not create instance of class: {e.Message}.{Environment.NewLine}See inner exception.", e);
+                var ser = JsonSerializer.Create(Serializer.serializationSettings);
+                ser.Serialize(file, obj);
             }
         }
     }

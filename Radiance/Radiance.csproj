@@ -112,11 +112,6 @@
     <Compile Include="Scenes\MainMenu.cs" />
     <Compile Include="Scenes\SceneBuilder.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
-    <Compile Include="Serialization\JsonSerializable.cs" />
-    <Compile Include="Serialization\SerializationException.cs" />
-    <Compile Include="Serialization\SerializationExtensions.cs" />
-    <Compile Include="Serialization\JClass.cs" />
-    <Compile Include="Serialization\SerializedField.cs" />
     <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="Tile\Tilemap.cs" />
   </ItemGroup>

@@ -1,62 +1,49 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-using Newtonsoft.Json.Linq;
-
-using Radiance.Serialization;
 using Radiance.Events;
 
 namespace Radiance.Components
 {
-    public abstract class Component : JsonSerializable
+    public abstract class Component
     {
-        [SerializedField]
         public bool Active { get; set; }
         public Component Parent { get; set; }
-        [SerializedField]
         public Transform Transform { get; protected set; }
 
-        [SerializedField]
-        protected List<Component> children;
+        public List<Component> Children;
 
         public Component(Component parent = null, Transform transform = null)
         {
             this.Active = true;
             this.Parent = parent;
-            this.children = new List<Component>();
+            this.Children = new List<Component>();
             this.Transform = transform ?? this.CreateTransform();
-        }
-        public Component(JObject obj)
-        {
-            this.Active = obj.Value<bool>("Active");
-            this.Transform = this.CreateTransform(obj["Transform"] as JObject);
-            this.children = Serializer.DeserializeArray(obj["Children"] as JArray).Cast<Component>().ToList();
-            children.ForEach(c => c.Parent = this);
         }
 
         public T AddComponent<T>(T c) where T : Component
         {
-            if (!this.children.Contains(c))
+            if (!this.Children.Contains(c))
             {
                 c.Parent = this;
-                this.children.Add(c);
+                this.Children.Add(c);
             }
             return c;
         }
 
         public T GetComponent<T>() where T : Component
         {
-            return this.children.Where(o => o is T).FirstOrDefault() as T;
+            return this.Children.Where(o => o is T).FirstOrDefault() as T;
         }
 
         public void RemoveComponent<T>(T c) where T : Component
         {
-            this.children.Remove(c);
+            this.Children.Remove(c);
         }
 
         public virtual void Start()
         {
-            foreach (Component child in this.children)
+            foreach (Component child in this.Children)
             {
                 child.Start();
             }
@@ -64,7 +51,7 @@ namespace Radiance.Components
 
         public virtual void Sleep()
         {
-            foreach (Component child in this.children)
+            foreach (Component child in this.Children)
             {
                 child.Sleep();
             }
@@ -72,7 +59,7 @@ namespace Radiance.Components
 
         public virtual void OnMouseDown(MouseEventArgs e)
         {
-            foreach (Component child in this.children)
+            foreach (Component child in this.Children)
             {
                 child.OnMouseDown(e);
             }
@@ -80,7 +67,7 @@ namespace Radiance.Components
 
         public virtual void OnMouseUp(MouseEventArgs e)
         {
-            foreach (Component child in this.children)
+            foreach (Component child in this.Children)
             {
                 child.OnMouseUp(e);
             }
@@ -88,24 +75,15 @@ namespace Radiance.Components
 
         public virtual void OnMouseMove(MouseEventArgs e)
         {
-            foreach (Component child in this.children)
+            foreach (Component child in this.Children)
             {
                 child.OnMouseMove(e);
             }
         }
 
-        protected virtual Transform CreateTransform(JObject json = null)
+        protected virtual Transform CreateTransform()
         {
-            if (json != null)
-            {
-                return new Transform(this, json);
-            }
             return new Transform(this);
-        }
-
-        public override JClass Serialize()
-        {
-            return new JClass(this);
         }
     }
 }

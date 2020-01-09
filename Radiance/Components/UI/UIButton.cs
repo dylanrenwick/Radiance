@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+
 using Radiance.Events;
 using Radiance.Graphics;
-using Radiance.Serialization;
-using Microsoft.Xna.Framework;
 using static Radiance.Input;
 
 namespace Radiance.Components.UI
@@ -15,15 +10,10 @@ namespace Radiance.Components.UI
     {
         public event MouseEventHandler OnClick;
 
-        [SerializedField]
         public string Text { get; set; }
-        [SerializedField]
         public Color TextColor { get; set; }
-        [SerializedField]
         public Color HoverColor { get; set; }
-        [SerializedField]
         public TextHoriAlign HorizontalAlign { get; set; }
-        [SerializedField]
         public TextVertAlign VerticalAlign { get; set; }
 
         private bool isHover;

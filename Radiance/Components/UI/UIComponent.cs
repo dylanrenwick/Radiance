@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 using Radiance.Events;
-using Newtonsoft.Json.Linq;
 
 namespace Radiance.Components.UI
 {
@@ -22,11 +15,9 @@ namespace Radiance.Components.UI
         public Rectangle Rect => this.RectTransform.Rect;
 
         public UIComponent(Component parent = null): base(parent) { }
-        public UIComponent(JObject json): base(json) { }
 
-        protected override Transform CreateTransform(JObject json = null)
+        protected override Transform CreateTransform()
         {
-            if (json != null) return new RectTransform(this, json);
             return new RectTransform(this);
         }
 

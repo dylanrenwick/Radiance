@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.Xna.Framework;
 
 using Radiance.Serialization;
 
 namespace Radiance.Components
 
 {
-    public class Transform : JsonSerializable
+    public class Transform
     {
         public Vector3 LocalPosition;
         public float LocalRotation;
@@ -36,20 +30,6 @@ namespace Radiance.Components
         public Transform(Component parent)
         {
             this.Parent = parent;
-        }
-        public Transform(Component parent, JObject json)
-        {
-            this.Parent = parent;
-            this.LocalPosition = Serializer.DeserializeVector3(json["Position"] as JObject);
-            this.LocalRotation = json.Value<float>("Rotation");
-        }
-
-        public override JClass Serialize()
-        {
-            var jObj = new JClass(this);
-            jObj.Add("Position", this.LocalPosition.Serialize());
-            jObj.Add("Rotation", this.LocalRotation);
-            return jObj;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Radiance.Components.Entity
 
         public void Update(Input input, GameTime time)
         {
-            foreach (IUpdatable child in this.children.Where(c => c is IUpdatable))
+            foreach (IUpdatable child in this.Children.Where(c => c is IUpdatable))
             {
                 child.Update(input, time);
             }

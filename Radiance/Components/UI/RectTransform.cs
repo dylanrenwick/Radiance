@@ -1,11 +1,4 @@
-﻿using Radiance.Serialization;
-using Microsoft.Xna.Framework;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
 
 namespace Radiance.Components.UI
 {
@@ -24,19 +17,8 @@ namespace Radiance.Components.UI
         }
 
         public RectTransform(Component parent): base(parent) { }
-        public RectTransform(Component parent, JObject json): base(parent, json)
-        {
-            this.Size = Serializer.DeserializeVector2(json["Size"] as JObject);
-        }
 
         public bool Contains(Point p) => this.Rect.Contains(p);
         public bool Contains(int x, int y) => this.Rect.Contains(x, y);
-
-        public override JClass Serialize()
-        {
-            JClass jObj = base.Serialize();
-            jObj.Add("Size", this.Size.Serialize());
-            return jObj;
-        }
     }
 }

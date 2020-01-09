@@ -1,11 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.IO;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Radiance.Scenes;
 using Radiance.Graphics;
-using Radiance.Components;
-using Radiance.Components.UI;
+
+using Newtonsoft.Json;
 
 namespace Radiance
 {
@@ -62,6 +64,15 @@ namespace Radiance
             this.input = new Input();
             SceneManager.Input = this.input;
             SceneManager.SetActiveScene(SceneBuilder.LoadScreen());
+            using (StreamWriter file = File.CreateText(@"C:\Users\drenwick\Desktop\test.json"))
+            {
+                var sets = new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                };
+                var ser = JsonSerializer.Create(sets);
+                ser.Serialize(file, SceneManager.ActiveScene);
+            }
         }
 
         /// <summary>
