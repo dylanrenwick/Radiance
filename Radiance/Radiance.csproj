@@ -94,6 +94,7 @@
     <Compile Include="Components\UI\UIButton.cs" />
     <Compile Include="Components\UI\UILabel.cs" />
     <Compile Include="Components\UI\UISlider.cs" />
+    <Compile Include="Config\ConfigEntry.cs" />
     <Compile Include="Scenes\GameLoader.cs" />
     <Compile Include="Scenes\LoadScreen.cs" />
     <Compile Include="Scenes\MainScene.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="Tile\Tilemap.cs" />
+    <Compile Include="Config\UserConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
