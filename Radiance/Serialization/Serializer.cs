@@ -24,5 +24,14 @@ namespace Radiance.Serialization
                 ser.Serialize(file, obj);
             }
         }
+
+        public static T DeserializeObjectFromFile<T>(string filePath)
+        {
+            using (StreamReader file = File.OpenText(filePath))
+            {
+                var ser = JsonSerializer.Create(Serializer.serializationSettings);
+                return (T)ser.Deserialize(file, typeof(T));
+            }
+        }
     }
 }
