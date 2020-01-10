@@ -1,13 +1,10 @@
-﻿using System.IO;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Radiance.Config;
 using Radiance.Scenes;
 using Radiance.Graphics;
-
-using Newtonsoft.Json;
 
 namespace Radiance
 {
@@ -57,6 +54,8 @@ namespace Radiance
             this.renderContext = new RenderContext(spriteBatch);
             renderContext.MainCamera = new Camera();
 
+            UserConfig.LoadConfig();
+
             Radiance.Assets.AssetManager.Content = this.Content;
             // Load default font
             renderContext.Font = Radiance.Assets.AssetManager.LoadFont("Arial");
@@ -64,15 +63,6 @@ namespace Radiance
             this.input = new Input();
             SceneManager.Input = this.input;
             SceneManager.SetActiveScene(SceneBuilder.LoadScreen());
-            using (StreamWriter file = File.CreateText(@"C:\Users\drenwick\Desktop\test.json"))
-            {
-                var sets = new JsonSerializerSettings
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                };
-                var ser = JsonSerializer.Create(sets);
-                ser.Serialize(file, SceneManager.ActiveScene);
-            }
         }
 
         /// <summary>

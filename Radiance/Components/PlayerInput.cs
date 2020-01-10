@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
+using Radiance.Config;
 using Radiance.Components.Entity.Character;
 
 namespace Radiance.Components
@@ -16,10 +17,10 @@ namespace Radiance.Components
 
         public void Update(Input input, GameTime time)
         {
-            bool left = input.IsAnyKeyDown(Keys.Left, Keys.A);
-            bool right = input.IsAnyKeyDown(Keys.Right, Keys.D);
-            bool up = input.IsAnyKeyDown(Keys.Up, Keys.W);
-            bool down = input.IsAnyKeyDown(Keys.Down, Keys.S);
+            bool left = input.IsKeyDown(UserConfig.GetConfig<KeyConfigEntry>(ConfigCategory.Controls, "Left").Value);
+            bool right = input.IsKeyDown(UserConfig.GetConfig<KeyConfigEntry>(ConfigCategory.Controls, "Right").Value);
+            bool up = input.IsKeyDown(UserConfig.GetConfig<KeyConfigEntry>(ConfigCategory.Controls, "Up").Value);
+            bool down = input.IsKeyDown(UserConfig.GetConfig<KeyConfigEntry>(ConfigCategory.Controls, "Down").Value);
 
             bool click = input.IsLeftButtonDown();
 
