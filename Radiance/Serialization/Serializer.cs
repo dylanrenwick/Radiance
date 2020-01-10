@@ -8,7 +8,8 @@ namespace Radiance.Serialization
     {
         private readonly static JsonSerializerSettings serializationSettings = new JsonSerializerSettings
         {
-            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            TypeNameHandling = TypeNameHandling.Auto
         };
 
         public static string SerializeObject(object obj)
