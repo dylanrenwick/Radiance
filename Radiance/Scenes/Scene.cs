@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.Xna.Framework;
 
 using Radiance.Graphics;
@@ -22,7 +18,7 @@ namespace Radiance.Scenes
         public void Draw(RenderContext g, GameTime time)
         {
             g.Begin();
-            foreach (IRenderable child in this.Children.Where(c => c.Active && c is IRenderable))
+            foreach (IRenderable child in this.GetAllChildren().Where(c => c.Active && c is IRenderable))
             {
                 child.Draw(g, time);
             }
@@ -31,7 +27,7 @@ namespace Radiance.Scenes
 
         public void Update(Input input, GameTime time)
         {
-            foreach (IUpdatable child in this.Children.Where(c => c.Active && c is IUpdatable))
+            foreach (IUpdatable child in this.GetAllChildren().Where(c => c.Active && c is IUpdatable))
             {
                 child.Update(input, time);
             }

@@ -41,6 +41,11 @@ namespace Radiance.Components
             this.Children.Remove(c);
         }
 
+        public List<Component> GetAllChildren()
+        {
+            return this.Children.Concat(this.Children.SelectMany(c => c.GetAllChildren())).ToList();
+        }
+
         public virtual void Start()
         {
             foreach (Component child in this.Children)
