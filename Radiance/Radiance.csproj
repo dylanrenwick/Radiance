@@ -95,6 +95,7 @@
     <Compile Include="Components\UI\UILabel.cs" />
     <Compile Include="Components\UI\UISlider.cs" />
     <Compile Include="Config\ConfigEntry.cs" />
+    <Compile Include="Config\KeyConfigEntry.cs" />
     <Compile Include="Scenes\GameLoader.cs" />
     <Compile Include="Scenes\LoadScreen.cs" />
     <Compile Include="Scenes\MainScene.cs" />
