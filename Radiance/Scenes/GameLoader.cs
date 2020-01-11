@@ -16,29 +16,23 @@ namespace Radiance.Scenes
         public UILabel StatusLabel { get; set; }
         public UILabel PercentLabel { get; set; }
 
-        private Dictionary<string, Func<Scene>> scenes;
-        private Tuple<string, OriginType>[] textures;
-
-        private int itemCount => this.scenes.Count + this.textures.Length;
         private int progress = 0;
         private bool done = false;
         private string statusString;
 
-        private Scene nextScene;
+        private string nextScene;
+
+        private LoadInformation loadInfo;
+
+        public GameLoader(LoadInformation loadInfo, string nextScene, Component parent = null) : base(parent)
+        {
+            this.loadInfo = loadInfo;
+            this.nextScene = nextScene;
+        }
 
         public override void Start()
         {
-            this.scenes = new Dictionary<string, Func<Scene>>
-            {
-                { "Main Menu", () => this.LoadScene(() => SceneBuilder.MainMenu(new Point(50, 300), new Point(150, 50), 20), true) },
-                { "Main Scene", () => this.LoadScene(() => SceneBuilder.MainScene()) }
-            };
-            this.textures = new Tuple<string, OriginType>[]
-            {
-                new Tuple<string, OriginType>("playerShip1_blue", OriginType.Center)
-            };
-
-            this.LoadBar.MaxValue = this.itemCount;
+            this.LoadBar.MaxValue = this.loadInfo.ItemCount;
 
             Thread loadThread = new Thread(new ThreadStart(this.LoadContent));
             loadThread.IsBackground = true;
@@ -51,21 +45,21 @@ namespace Radiance.Scenes
             if (this.done) SceneManager.SetActiveScene(this.nextScene);
 
             this.StatusLabel.Text = this.statusString;
-            float percentage = (float)this.progress / this.itemCount;
+            float percentage = (float)this.progress / this.loadInfo.ItemCount;
             this.LoadBar.NormalizedValue = percentage;
             this.PercentLabel.Text = $"{Math.Round(percentage * 100)}%";
         }
 
         private void LoadContent()
         {
-            foreach (Tuple<string, OriginType> tex in this.textures)
+            foreach (Tuple<string, OriginType> tex in this.loadInfo.Textures)
             {
                 this.statusString = "Loading Asset: " + tex.Item1;
                 Radiance.Assets.AssetManager.LoadTexture2D(tex.Item1, tex.Item2);
                 this.progress += 1;
             }
 
-            foreach (KeyValuePair<string, Func<Scene>> kvp in this.scenes)
+            foreach (KeyValuePair<string, Func<Scene>> kvp in this.loadInfo.Scenes)
             {
                 this.statusString = "Loading Scene: " + kvp.Key;
                 SceneManager.AddScene(kvp.Value());
@@ -75,11 +69,14 @@ namespace Radiance.Scenes
             this.done = true;
         }
 
-        private Scene LoadScene(Func<Scene> sceneBuilder, bool makePrimary = false)
+        public struct LoadInformation
         {
-            Scene newScene = sceneBuilder();
-            if (makePrimary) this.nextScene = newScene;
-            return newScene;
+            public Dictionary<string, Func<Scene>> Scenes;
+
+            public List<Tuple<string, OriginType>> Textures;
+            public List<string> Fonts;
+
+            public int ItemCount => this.Scenes.Count + this.Textures.Count + this.Fonts.Count;
         }
     }
 }

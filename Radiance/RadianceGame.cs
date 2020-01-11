@@ -1,7 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Radiance.Assets;
 using Radiance.Config;
 using Radiance.Scenes;
 using Radiance.Graphics;
@@ -11,19 +15,55 @@ namespace Radiance
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class RadianceGame : Game
+    public abstract class RadianceGame : Game
     {
         public static RadianceGame Instance { get; private set; }
+
+        protected string mainSceneName;
 
         private GraphicsDeviceManager graphics;
         private RenderContext renderContext;
 
         private Input input;
-        
+
+        private Dictionary<string, Func<Scene>> scenes;
+        private List<Tuple<string, OriginType>> textures;
+        private List<string> fonts;
+
         public RadianceGame()
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
+        }
+
+        public void LoadScene(string name, Func<Scene> factoryMethod)
+        {
+            this.scenes[name] = factoryMethod;
+        }
+        public void LoadScenes(List<Tuple<string, Func<Scene>>> scenes)
+        {
+            foreach (var scene in scenes)
+            {
+                this.LoadScene(scene.Item1, scene.Item2);
+            }
+        }
+
+        public void LoadTexture2D(string path, OriginType originType = OriginType.Center)
+        {
+            this.textures.Add(new Tuple<string, OriginType>(path, originType));
+        }
+        public void LoadTexture2Ds(List<Tuple<string, OriginType>> textures)
+        {
+            this.textures.AddRange(textures);
+        }
+
+        public void LoadFont(string path)
+        {
+            this.fonts.Add(path);
+        }
+        public void LoadFonts(List<string> paths)
+        {
+            this.fonts.AddRange(paths);
         }
 
         /// <summary>
@@ -35,6 +75,11 @@ namespace Radiance
         protected override void Initialize()
         {
             RadianceGame.Instance = this;
+
+            this.scenes = new Dictionary<string, Func<Scene>>();
+            this.textures = new List<Tuple<string, OriginType>>();
+            this.fonts = new List<string>();
+
             base.Initialize();
             this.IsMouseVisible = true;
 
@@ -62,7 +107,12 @@ namespace Radiance
 
             this.input = new Input();
             SceneManager.Input = this.input;
-            SceneManager.SetActiveScene(SceneBuilder.LoadScreen());
+            SceneManager.SetActiveScene(SceneBuilder.LoadScreen(new GameLoader.LoadInformation()
+            {
+                Scenes = this.scenes,
+                Textures = this.textures,
+                Fonts = this.fonts
+            }, this.mainSceneName));
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace Radiance.Scenes
 {
     public static partial class SceneBuilder
     {
-        public static Scene LoadScreen()
+        public static Scene LoadScreen(GameLoader.LoadInformation loadInfo, string mainScene)
         {
             Scene loadScreen = new Scene("LoadScreen");
 
@@ -26,7 +26,7 @@ namespace Radiance.Scenes
             percentLabel.HorizontalAlign = Graphics.TextHoriAlign.Middle;
             percentLabel.RectTransform.Rect = new Rectangle(0, 500, 1280, 50);
 
-            GameLoader loader = new GameLoader();
+            GameLoader loader = new GameLoader(loadInfo, mainScene);
             loader.LoadBar = loadBar;
             loader.StatusLabel = statusLabel;
             loader.PercentLabel = percentLabel;
