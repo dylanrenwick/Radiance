@@ -37,9 +37,6 @@ namespace RadianceTest
             this.LoadScene("Main Scene", () => SceneBuilder.MainScene());
             this.mainSceneName = "MainMenu";
 
-            this.LoadTexture2D("playerShip1_blue");
-            this.LoadTexture2D("map1");
-
             base.LoadContent();
         }
 
