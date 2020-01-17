@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
@@ -9,6 +10,7 @@ using Radiance.Assets;
 using Radiance.Config;
 using Radiance.Scenes;
 using Radiance.Graphics;
+using Radiance.Coroutines;
 
 namespace Radiance
 {
@@ -29,6 +31,8 @@ namespace Radiance
         private Dictionary<string, Func<Scene>> scenes;
         private List<Tuple<string, OriginType>> textures;
         private List<string> fonts;
+
+        private List<Coroutine> coroutines;
 
         public RadianceGame()
         {
@@ -66,6 +70,11 @@ namespace Radiance
             this.fonts.AddRange(paths);
         }
 
+        public void StartCoroutine(Coroutine coroutine)
+        {
+            this.coroutines.Add(coroutine);
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -79,6 +88,8 @@ namespace Radiance
             this.scenes = new Dictionary<string, Func<Scene>>();
             this.textures = new List<Tuple<string, OriginType>>();
             this.fonts = new List<string>();
+
+            this.coroutines = new List<Coroutine>();
 
             base.Initialize();
             this.IsMouseVisible = true;
@@ -137,6 +148,13 @@ namespace Radiance
             this.input.Update(gameTime);
 
             SceneManager.Update(this.input, gameTime);
+
+            foreach (Coroutine coroutine in this.coroutines)
+            {
+                coroutine.Run(gameTime);
+            }
+
+            this.coroutines = this.coroutines.Where(c => !c.IsComplete).ToList();
 
             base.Update(gameTime);
         }

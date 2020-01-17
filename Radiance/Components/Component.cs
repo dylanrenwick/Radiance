@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Radiance.Events;
+using Radiance.Coroutines;
 
 namespace Radiance.Components
 {
@@ -44,6 +45,11 @@ namespace Radiance.Components
         public List<Component> GetAllChildren()
         {
             return this.Children.Concat(this.Children.SelectMany(c => c.GetAllChildren())).ToList();
+        }
+
+        public void StartCoroutine(IEnumerator<CoroutineState> coroutine)
+        {
+            RadianceGame.Instance.StartCoroutine(new Coroutine(this, coroutine));
         }
 
         public virtual void Start()

@@ -51,7 +51,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|AnyCPU'">
@@ -97,6 +98,8 @@
     <Compile Include="Components\UI\UISlider.cs" />
     <Compile Include="Config\ConfigEntry.cs" />
     <Compile Include="Config\KeyConfigEntry.cs" />
+    <Compile Include="Coroutines\Coroutine.cs" />
+    <Compile Include="Coroutines\CoroutineState.cs" />
     <Compile Include="Scenes\GameLoader.cs" />
     <Compile Include="Scenes\LoadScreen.cs" />
     <Compile Include="Scenes\Scene.cs" />
@@ -125,10 +128,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icon.ico" />
-    <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
