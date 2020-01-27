@@ -12,6 +12,6 @@ namespace Radiance.Components
 {
     public interface IRenderable
     {
-        void Draw(RenderContext g, GameTime time);
+        void Draw(RenderContext g);
     }
 }

@@ -15,21 +15,21 @@ namespace Radiance.Scenes
             this.Name = name;
         }
 
-        public void Draw(RenderContext g, GameTime time)
+        public void Draw(RenderContext g)
         {
             g.Begin();
             foreach (IRenderable child in this.GetAllChildren().Where(c => c.Active && c is IRenderable))
             {
-                child.Draw(g, time);
+                child.Draw(g);
             }
             g.End();
         }
 
-        public void Update(Input input, GameTime time)
+        public void Update(Input input)
         {
             foreach (IUpdatable child in this.GetAllChildren().Where(c => c.Active && c is IUpdatable))
             {
-                child.Update(input, time);
+                child.Update(input);
             }
         }
     }

@@ -145,13 +145,15 @@ namespace Radiance
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            this.input.Update(gameTime);
+            Time.Update(gameTime);
 
-            SceneManager.Update(this.input, gameTime);
+            this.input.Update();
+
+            SceneManager.Update(this.input);
 
             foreach (Coroutine coroutine in this.coroutines)
             {
-                coroutine.Run(gameTime);
+                coroutine.Run();
             }
 
             this.coroutines = this.coroutines.Where(c => !c.IsComplete).ToList();
@@ -167,7 +169,7 @@ namespace Radiance
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SceneManager.Draw(this.renderContext, gameTime);
+            SceneManager.Draw(this.renderContext);
 
             base.Draw(gameTime);
         }

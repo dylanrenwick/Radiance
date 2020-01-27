@@ -98,6 +98,7 @@
     <Compile Include="Components\UI\UISlider.cs" />
     <Compile Include="Config\ConfigEntry.cs" />
     <Compile Include="Config\KeyConfigEntry.cs" />
+    <Compile Include="Coroutines\Animation.cs" />
     <Compile Include="Coroutines\Coroutine.cs" />
     <Compile Include="Coroutines\CoroutineState.cs" />
     <Compile Include="Scenes\GameLoader.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="Tile\Tilemap.cs" />
     <Compile Include="Config\UserConfig.cs" />
+    <Compile Include="Time.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -6,7 +6,7 @@ using Radiance.Coroutines;
 
 namespace Radiance.Components
 {
-    public abstract class Component
+    public abstract partial class Component
     {
         public bool Active { get; set; }
         public Component Parent { get; set; }

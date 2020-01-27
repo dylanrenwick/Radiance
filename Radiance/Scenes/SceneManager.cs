@@ -15,14 +15,14 @@ namespace Radiance.Scenes
 
         private static List<Scene> scenes = new List<Scene>();
 
-        public static void Draw(RenderContext g, GameTime gameTime)
+        public static void Draw(RenderContext g)
         {
-            SceneManager.ActiveScene.Draw(g, gameTime);
+            SceneManager.ActiveScene.Draw(g);
         }
 
-        public static void Update(Input input, GameTime gameTime)
+        public static void Update(Input input)
         {
-            SceneManager.ActiveScene.Update(input, gameTime);
+            SceneManager.ActiveScene.Update(input);
         }
 
         public static void AddScene(Scene s)

@@ -15,7 +15,7 @@ namespace Radiance.Components
             this.characterBody = cb;
         }
 
-        public void Update(Input input, GameTime time)
+        public void Update(Input input)
         {
             bool left = input.IsKeyDown(UserConfig.GetConfig<KeyConfigEntry>(ConfigCategory.Controls, "Left").Value);
             bool right = input.IsKeyDown(UserConfig.GetConfig<KeyConfigEntry>(ConfigCategory.Controls, "Right").Value);

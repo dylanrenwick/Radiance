@@ -12,7 +12,7 @@ namespace Radiance.Components.UI
 
         public UIPanel() : base() { }
 
-        public virtual void Draw(RenderContext g, GameTime time)
+        public virtual void Draw(RenderContext g)
         {
             g.DrawTexture(this.Texture, this.RectTransform.Rect, this.Color);
         }

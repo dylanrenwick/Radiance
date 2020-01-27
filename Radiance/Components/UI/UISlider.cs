@@ -27,9 +27,9 @@ namespace Radiance.Components.UI
             this.FillColor = fillColor.Value;
         }
 
-        public override void Draw(RenderContext g, GameTime time)
+        public override void Draw(RenderContext g)
         {
-            base.Draw(g, time);
+            base.Draw(g);
             Rectangle rect = this.Rect;
             rect.Width = (int)Math.Round(this.NormalizedValue * rect.Width);
             g.DrawTexture(null, rect, this.FillColor);

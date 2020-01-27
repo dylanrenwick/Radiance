@@ -7,6 +7,6 @@ namespace Radiance.Components.Entity.EntityStates
         public EntityStateMachine ParentMachine { get; set; }
         protected Entity parentEntity => this.ParentMachine.Entity;
 
-        public abstract void Update(GameTime gameTime);
+        public abstract void Update();
     }
 }

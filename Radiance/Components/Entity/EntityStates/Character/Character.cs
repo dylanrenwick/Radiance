@@ -22,7 +22,7 @@ namespace Radiance.Components.Entity.EntityStates.Character
             this.Color = Color.White;
         }
 
-        public void Draw(RenderContext g, GameTime time)
+        public void Draw(RenderContext g)
         {
             g.DrawTexture(Sprite, this.Transform.PointPosition, this.Color, this.Transform.Rotation, this.Sprite.Origin);
         }

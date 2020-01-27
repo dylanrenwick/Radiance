@@ -40,7 +40,7 @@ namespace Radiance.Scenes
             base.Start();
         }
 
-        public void Update(Input input, GameTime time)
+        public void Update(Input input)
         {
             if (this.done) SceneManager.SetActiveScene(this.nextScene);
 

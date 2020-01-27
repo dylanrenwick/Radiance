@@ -19,7 +19,7 @@ namespace Radiance.Components.UI
 
         public UILabel() : base() { }
 
-        public void Draw(RenderContext g, GameTime gameTime)
+        public void Draw(RenderContext g)
         {
             g.DrawText(this.Text, this.Transform.PointPosition, this.Color, this.FontSize, this.Rect, this.HorizontalAlign, this.VerticalAlign);
         }

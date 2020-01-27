@@ -25,9 +25,9 @@ namespace Radiance.Components.UI
             this.HoverColor = new Color(1f, 1f, 1f, 0.3f);
         }
 
-        public override void Draw(RenderContext g, GameTime time)
+        public override void Draw(RenderContext g)
         {
-            base.Draw(g, time);
+            base.Draw(g);
             if (this.isHover) g.DrawTexture(this.Texture, this.Rect, this.HoverColor);
             g.DrawText(this.Text, new Point((int)this.Transform.Position.X, (int)this.Transform.Position.Y), this.TextColor, 24, this.Rect, this.HorizontalAlign, this.VerticalAlign);
         }

@@ -19,7 +19,7 @@ namespace Radiance.Components.Entity.EntityStates.Character
 
         public CharacterIdleState() : base() { }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             if (!this.characterBody.MoveInputs.HasValue && !this.characterBody.AimInputs.HasValue) return;
 

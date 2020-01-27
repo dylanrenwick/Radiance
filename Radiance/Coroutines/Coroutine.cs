@@ -20,7 +20,7 @@ namespace Radiance.Coroutines
             this.coroutine = coroutine;
         }
 
-        public void Run(GameTime time)
+        public void Run()
         {
             if (currentState != null)
             {
@@ -31,7 +31,7 @@ namespace Radiance.Coroutines
                         break;
                     case CoroutineStatus.Delay:
                         float remainingTime = (float)this.currentState.Item2;
-                        remainingTime -= (float)time.ElapsedGameTime.TotalSeconds;
+                        remainingTime -= Time.DeltaTime;
                         if (remainingTime <= 0) ResumeCoroutine();
                         else this.currentState = new CoroutineState(this.currentState.Item1, remainingTime);
                         break;

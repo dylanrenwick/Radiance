@@ -31,14 +31,14 @@ namespace Radiance.Components.Entity.EntityStates
             this.MainState = mainState;
         }
 
-        public void Update(Input input, GameTime gameTime)
+        public void Update(Input input)
         {
             if (this.currentState == null)
             {
                 if (this.MainState == null) return;
                 this.currentState = this.MainState;
             }
-            this.currentState.Update(gameTime);
+            this.currentState.Update();
         }
     }
 }

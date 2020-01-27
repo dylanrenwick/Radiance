@@ -23,11 +23,11 @@ namespace Radiance.Components.Entity
             this.AddComponent(new EntityStateMachine(mainState));
         }
 
-        public void Update(Input input, GameTime time)
+        public void Update(Input input)
         {
             foreach (IUpdatable child in this.Children.Where(c => c is IUpdatable))
             {
-                child.Update(input, time);
+                child.Update(input);
             }
         }
     }

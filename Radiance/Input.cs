@@ -38,7 +38,7 @@ namespace Radiance
 #endif
         }
 
-        public void Update(GameTime gameTime)
+        public void Update()
         {
             this.UpdateMouse();
         }

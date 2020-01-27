@@ -10,6 +10,6 @@ namespace Radiance.Components
 {
     public interface IUpdatable
     {
-        void Update(Input input, GameTime time);
+        void Update(Input input);
     }
 }
