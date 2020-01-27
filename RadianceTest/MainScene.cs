@@ -1,6 +1,9 @@
 ﻿using Radiance.Scenes;
 
 using RadianceTest.Components;
+using RadianceTest.Components.UI;
+
+using Microsoft.Xna.Framework;
 
 namespace RadianceTest
 {
@@ -12,7 +15,17 @@ namespace RadianceTest
 
             var map = new CityMap(100, 100);
 
+            var zoomIndicator = new UIFadingLabel()
+            {
+                Text = "1x",
+                Color = Color.White,
+                FontSize = 48,
+                FadeTime = 2f
+            };
+            zoomIndicator.RectTransform.Rect = new Rectangle(100, 100, 100, 100);
+
             newScene.AddComponent(map);
+            newScene.AddComponent(zoomIndicator);
 
             return newScene;
         }

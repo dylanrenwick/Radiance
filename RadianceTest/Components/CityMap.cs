@@ -18,7 +18,7 @@ namespace RadianceTest.Components
             this.map = new Tile[height, width];
         }
 
-        public void Draw(RenderContext g, GameTime time)
+        public void Draw(RenderContext g)
         {
             Texture2D tex = new Texture2D(g.GraphicsDevice, this.Width, this.Height, false, SurfaceFormat.Color);
 
