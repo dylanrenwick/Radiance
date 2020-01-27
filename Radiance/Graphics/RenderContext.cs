@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -55,24 +52,23 @@ namespace Radiance.Graphics
         public void DrawTexture(Texture2D tex, Point position, Color color)
         {
             var destRect = new Rectangle(position, new Point(tex.Width, tex.Height));
-            this.DrawTexture(tex, destRect, null, color, 0f, Vector2.One);
+            this.DrawTexture(tex, destRect, null, color, 0f, Vector2.One, Vector2.Zero);
         }
         public void DrawTexture(Texture2D tex, Point position, Color color, float rotation)
         {
             var destRect = new Rectangle(position, new Point(tex.Width, tex.Height));
-            this.DrawTexture(tex, destRect, null, color, rotation, Vector2.One);
+            this.DrawTexture(tex, destRect, null, color, rotation, Vector2.One, Vector2.Zero);
         }
         public void DrawTexture(Texture2D tex, Rectangle destRect, Color color)
         {
-            this.DrawTexture(tex, destRect, null, color, 0f, Vector2.One);
+            this.DrawTexture(tex, destRect, null, color, 0f, Vector2.One, Vector2.Zero);
         }
-        public void DrawTexture(Texture2D tex, Rectangle destRect, Rectangle? sourceRect, Color color, float rotation, Vector2 scale, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0f)
+        public void DrawTexture(Texture2D tex, Rectangle destRect, Rectangle? sourceRect, Color color, float rotation, Vector2 scale, Vector2 origin, SpriteEffects spriteEffects = SpriteEffects.None, float layerDepth = 0f)
         {
             if (tex == null) tex = this.pixel;
             destRect.Location -= this.MainCamera.Position;
-            destRect.Size = new Point(-destRect.Width, -destRect.Height);
-            if (!sourceRect.HasValue) sourceRect = new Rectangle(0, 0, tex.Width, tex.Height);
-            this.sb.Draw(tex, destRect, sourceRect, color, this.Deg2Rad(rotation), scale, spriteEffects, layerDepth);
+            if (!sourceRect.HasValue) sourceRect = new Rectangle(0, 0, tex.Width * (int)scale.X, tex.Height * (int)scale.Y);
+            this.sb.Draw(tex, destRect, sourceRect, color, this.Deg2Rad(rotation), origin, spriteEffects, layerDepth);
         }
         public void DrawTexture(Texture2D tex, Point position, Color color, float rotation, Point origin)
         {
