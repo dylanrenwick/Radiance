@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 
@@ -12,12 +13,15 @@ namespace Radiance.Coroutines
         private IEnumerator<CoroutineState> coroutine;
         private CoroutineState currentState;
 
+        private List<Action<Component>> after;
+
         public bool IsComplete { get; private set; }
 
         public Coroutine(Component parent, IEnumerator<CoroutineState> coroutine)
         {
             this.parent = parent;
             this.coroutine = coroutine;
+            this.after = new List<Action<Component>>();
         }
 
         public void Run()
@@ -44,6 +48,20 @@ namespace Radiance.Coroutines
             {
                 this.ResumeCoroutine();
             }
+
+            if (this.IsComplete)
+            {
+                foreach (Action<Component> after in this.after)
+                {
+                    after(this.parent);
+                }
+            }
+        }
+
+        public Coroutine Then(Action<Component> pred)
+        {
+            this.after.Add(pred);
+            return this;
         }
 
         private void ResumeCoroutine()
@@ -55,6 +73,12 @@ namespace Radiance.Coroutines
             {
                 this.IsComplete = true;
             }
+        }
+
+        public static IEnumerator<CoroutineState> WaitForSeconds(float seconds)
+        {
+            yield return CoroutineState.Wait(seconds);
+            yield return CoroutineState.Halt();
         }
     }
 }

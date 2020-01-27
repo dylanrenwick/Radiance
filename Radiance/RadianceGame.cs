@@ -33,6 +33,7 @@ namespace Radiance
         private List<string> fonts;
 
         private List<Coroutine> coroutines;
+        private List<Coroutine> coroutineQueue;
 
         public RadianceGame()
         {
@@ -72,7 +73,7 @@ namespace Radiance
 
         public void StartCoroutine(Coroutine coroutine)
         {
-            this.coroutines.Add(coroutine);
+            this.coroutineQueue.Add(coroutine);
         }
 
         /// <summary>
@@ -90,6 +91,7 @@ namespace Radiance
             this.fonts = new List<string>();
 
             this.coroutines = new List<Coroutine>();
+            this.coroutineQueue = new List<Coroutine>();
 
             base.Initialize();
             this.IsMouseVisible = true;
@@ -151,10 +153,18 @@ namespace Radiance
 
             SceneManager.Update(this.input);
 
+            var finished = new List<Coroutine>();
+
             foreach (Coroutine coroutine in this.coroutines)
             {
                 coroutine.Run();
+                if (coroutine.IsComplete) finished.Add(coroutine);
             }
+
+            this.coroutines.AddRange(this.coroutineQueue);
+            this.coroutineQueue.Clear();
+
+            this.coroutines.RemoveAll(c => finished.Contains(c));
 
             this.coroutines = this.coroutines.Where(c => !c.IsComplete).ToList();
 

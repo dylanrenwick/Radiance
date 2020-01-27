@@ -24,9 +24,23 @@ namespace RadianceTest.Components.UI
             this.Fade();
         }
 
+        public void FadeAfterDelay(float delay)
+        {
+            Color from = this.Color;
+            Color to = from;
+            to.A = 0;
+            this.StartCoroutine(Coroutine.WaitForSeconds(delay)).Then(c => c.StartCoroutine(Animation.LerpColorProperty(this, "Color", from, to, this.FadeTime)));
+        }
+
+        public void FadeAfterDelay(float delay, float fadeTime)
+        {
+            this.FadeTime = fadeTime;
+            this.FadeAfterDelay(delay);
+        }
+
         public override void OnUIMouseDown(MouseEventArgs e)
         {
-            this.Fade();
+            this.FadeAfterDelay(2f);
 
             base.OnUIMouseDown(e);
         }

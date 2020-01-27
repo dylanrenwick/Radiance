@@ -47,9 +47,11 @@ namespace Radiance.Components
             return this.Children.Concat(this.Children.SelectMany(c => c.GetAllChildren())).ToList();
         }
 
-        public void StartCoroutine(IEnumerator<CoroutineState> coroutine)
+        public Coroutine StartCoroutine(IEnumerator<CoroutineState> coroutine)
         {
-            RadianceGame.Instance.StartCoroutine(new Coroutine(this, coroutine));
+            var newCoroutine = new Coroutine(this, coroutine);
+            RadianceGame.Instance.StartCoroutine(newCoroutine);
+            return newCoroutine;
         }
 
         public virtual void Start()

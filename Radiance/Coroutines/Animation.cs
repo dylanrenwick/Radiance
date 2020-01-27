@@ -2,8 +2,6 @@
 using System.Reflection;
 using System.Collections.Generic;
 
-using Radiance.Components;
-
 using Microsoft.Xna.Framework;
 
 namespace Radiance.Coroutines

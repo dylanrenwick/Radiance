@@ -20,9 +20,9 @@ namespace RadianceTest
                 Text = "1x",
                 Color = Color.White,
                 FontSize = 48,
-                FadeTime = 2f
+                FadeTime = 1f
             };
-            zoomIndicator.RectTransform.Rect = new Rectangle(100, 100, 100, 100);
+            zoomIndicator.RectTransform.Rect = new Rectangle(1180, 0, 100, 100);
 
             newScene.AddComponent(map);
             newScene.AddComponent(zoomIndicator);
