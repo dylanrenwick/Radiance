@@ -23,6 +23,7 @@ namespace RadianceTest
                 FadeTime = 1f
             };
             zoomIndicator.RectTransform.Rect = new Rectangle(1180, 0, 100, 100);
+            map.ZoomIndicator = zoomIndicator;
 
             newScene.AddComponent(map);
             newScene.AddComponent(zoomIndicator);
