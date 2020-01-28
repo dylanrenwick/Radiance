@@ -16,6 +16,7 @@ namespace Radiance.Coroutines
         private List<Action<Component>> after;
 
         public bool IsComplete { get; private set; }
+        public bool IsCancelled { get; private set; }
 
         public Coroutine(Component parent, IEnumerator<CoroutineState> coroutine)
         {
@@ -26,7 +27,13 @@ namespace Radiance.Coroutines
 
         public void Run()
         {
-            if (currentState != null)
+            if (this.IsCancelled)
+            {
+                this.IsComplete = true;
+                return;
+            }
+
+            if (this.currentState != null)
             {
                 switch (this.currentState.Item1)
                 {
@@ -62,6 +69,11 @@ namespace Radiance.Coroutines
         {
             this.after.Add(pred);
             return this;
+        }
+
+        public void Cancel()
+        {
+            this.IsCancelled = true;
         }
 
         private void ResumeCoroutine()
