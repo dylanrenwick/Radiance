@@ -33,7 +33,7 @@ namespace RadianceTest.Components
 
         public void Draw(RenderContext g)
         {
-            if (this.isDirty) this.GenerateTexture();
+            if (this.isDirty) this.GenerateTexture(g);
             g.DrawTexture(this.mapTex, this.Transform.PointPosition, Color.White, 0, Point.Zero, new Vector2(this.zoomLevel, this.zoomLevel));
         }
 
@@ -57,7 +57,7 @@ namespace RadianceTest.Components
             base.OnMouseScrollDown(e);
         }
 
-        private void GenerateTexture()
+        private void GenerateTexture(RenderContext g)
         {
             this.mapTex = new Texture2D(g.GraphicsDevice, this.Width, this.Height, false, SurfaceFormat.Color);
 
