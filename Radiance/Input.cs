@@ -16,6 +16,8 @@ namespace Radiance
         public event MouseEventHandler OnMouseButtonDown;
         public event MouseEventHandler OnMouseButtonUp;
         public event MouseEventHandler OnMouseMove;
+        public event MouseEventHandler OnMouseScrollUp;
+        public event MouseEventHandler OnMouseScrollDown;
 
         public bool MouseButtonsSwapped { get; private set; }
 
@@ -80,6 +82,15 @@ namespace Radiance
             if (mouse.Position != this.previousMouseState.Position)
             {
                 this.OnMouseMove?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
+            }
+
+            if (mouse.ScrollWheelValue > this.previousMouseState.ScrollWheelValue)
+            {
+                this.OnMouseScrollUp?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
+            }
+            else if (mouse.ScrollWheelValue < this.previousMouseState.ScrollWheelValue)
+            {
+                this.OnMouseScrollDown?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
             }
 
             this.previousMouseState = mouse;

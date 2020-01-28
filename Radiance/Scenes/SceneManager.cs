@@ -38,6 +38,8 @@ namespace Radiance.Scenes
                 SceneManager.Input.OnMouseButtonDown -= SceneManager.ActiveScene.OnMouseDown;
                 SceneManager.Input.OnMouseButtonUp -= SceneManager.ActiveScene.OnMouseUp;
                 SceneManager.Input.OnMouseMove -= SceneManager.ActiveScene.OnMouseMove;
+                SceneManager.Input.OnMouseScrollDown -= SceneManager.ActiveScene.OnMouseScrollDown;
+                SceneManager.Input.OnMouseScrollUp -= SceneManager.ActiveScene.OnMouseScrollUp;
 
                 SceneManager.ActiveScene.Sleep();
             }
@@ -47,6 +49,8 @@ namespace Radiance.Scenes
             SceneManager.Input.OnMouseButtonDown += SceneManager.ActiveScene.OnMouseDown;
             SceneManager.Input.OnMouseButtonUp += SceneManager.ActiveScene.OnMouseUp;
             SceneManager.Input.OnMouseMove += SceneManager.ActiveScene.OnMouseMove;
+            SceneManager.Input.OnMouseScrollDown += SceneManager.ActiveScene.OnMouseScrollDown;
+            SceneManager.Input.OnMouseScrollUp += SceneManager.ActiveScene.OnMouseScrollUp;
 
             SceneManager.ActiveScene.Start();
         }

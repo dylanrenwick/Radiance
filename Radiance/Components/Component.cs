@@ -94,6 +94,22 @@ namespace Radiance.Components
             }
         }
 
+        public virtual void OnMouseScrollUp(MouseEventArgs e)
+        {
+            foreach (Component child in this.Children)
+            {
+                child.OnMouseScrollUp(e);
+            }
+        }
+
+        public virtual void OnMouseScrollDown(MouseEventArgs e)
+        {
+            foreach (Component child in this.Children)
+            {
+                child.OnMouseScrollDown(e);
+            }
+        }
+
         protected virtual Transform CreateTransform()
         {
             return new Transform(this);
