@@ -3,6 +3,7 @@ using Radiance.Coroutines;
 
 using Microsoft.Xna.Framework;
 using Radiance.Events;
+using Radiance.Util;
 
 namespace RadianceTest.Components.UI
 {
@@ -18,7 +19,7 @@ namespace RadianceTest.Components.UI
             Color to = from;
             to.A = 0;
             if (this.currentCoroutine != null) this.currentCoroutine.Cancel();
-            this.currentCoroutine = this.StartCoroutine(Animation.LerpColorProperty(this, "Color", from, to, this.FadeTime));
+            this.currentCoroutine = this.StartCoroutine(Animation.EaseColorProperty(Easing.CubicIn, this, "Color", from, to, this.FadeTime));
         }
 
         public void Fade(float fadeTime)
@@ -33,7 +34,7 @@ namespace RadianceTest.Components.UI
             Color to = from;
             to.A = 0;
             if (this.currentCoroutine != null) this.currentCoroutine.Cancel();
-            this.currentCoroutine = this.StartCoroutine(Coroutine.WaitForSeconds(delay)).Then(c => this.currentCoroutine = c.StartCoroutine(Animation.LerpColorProperty(this, "Color", from, to, this.FadeTime)));
+            this.currentCoroutine = this.StartCoroutine(Coroutine.WaitForSeconds(delay)).Then(c => this.currentCoroutine = c.StartCoroutine(Animation.EaseColorProperty(Easing.CubicIn, this, "Color", from, to, this.FadeTime)));
         }
 
         public void FadeAfterDelay(float delay, float fadeTime)

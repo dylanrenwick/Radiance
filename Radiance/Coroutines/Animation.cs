@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 
+using Radiance.Util;
+
 namespace Radiance.Coroutines
 {
     public static class Animation
     {
-        public static IEnumerator<CoroutineState> LerpIntProperty(object target, string propertyName, int from, int to, float lerpTime)
+        public static IEnumerator<CoroutineState> EaseIntProperty(Func<float, float, float, float> easingFunction, object target, string propertyName, int from, int to, float lerpTime)
         {
             PropertyInfo property = target.GetType().GetProperty(propertyName);
             if (property == null) throw new Exception($"Could not find property {propertyName} on type {target.GetType().AssemblyQualifiedName}");
@@ -17,10 +19,9 @@ namespace Radiance.Coroutines
             float elapsedTime = 0;
             while (elapsedTime < lerpTime)
             {
-                int diff = to - from;
                 float t = elapsedTime / lerpTime;
 
-                int lerpedValue = from + (int)Math.Floor(diff * t);
+                int lerpedValue = (int)Math.Round(easingFunction(from, to, t));
 
                 property.SetValue(target, lerpedValue);
 
@@ -30,7 +31,7 @@ namespace Radiance.Coroutines
             }
         }
 
-        public static IEnumerator<CoroutineState> LerpFloatProperty(object target, string propertyName, float from, float to, float lerpTime)
+        public static IEnumerator<CoroutineState> EaseFloatProperty(Func<float, float, float, float> easingFunction, object target, string propertyName, float from, float to, float lerpTime)
         {
             PropertyInfo property = target.GetType().GetProperty(propertyName);
             if (property == null) throw new Exception($"Could not find property {propertyName} on type {target.GetType().AssemblyQualifiedName}");
@@ -39,10 +40,9 @@ namespace Radiance.Coroutines
             float elapsedTime = 0;
             while (elapsedTime < lerpTime)
             {
-                float diff = to - from;
                 float t = elapsedTime / lerpTime;
 
-                float lerpedValue = from + (diff * t);
+                float lerpedValue = easingFunction(from, to, t);
 
                 property.SetValue(target, lerpedValue);
 
@@ -52,7 +52,7 @@ namespace Radiance.Coroutines
             }
         }
 
-        public static IEnumerator<CoroutineState> LerpColorProperty(object target, string propertyName, Color from, Color to, float lerpTime)
+        public static IEnumerator<CoroutineState> EaseColorProperty(Func<float, float, float, float> easingFunction, object target, string propertyName, Color from, Color to, float lerpTime)
         {
             PropertyInfo property = target.GetType().GetProperty(propertyName);
             if (property == null) throw new Exception($"Could not find property {propertyName} on type {target.GetType().AssemblyQualifiedName}");
@@ -61,18 +61,14 @@ namespace Radiance.Coroutines
             float elapsedTime = 0;
             while (elapsedTime < lerpTime)
             {
-                int diffA = to.A - from.A;
-                int diffR = to.R - from.R;
-                int diffG = to.G - from.G;
-                int diffB = to.B - from.B;
                 float t = elapsedTime / lerpTime;
 
                 Color lerpedValue = new Color()
                 {
-                    A = (byte)(from.A + Math.Floor(diffA * t)),
-                    R = (byte)(from.R + Math.Floor(diffR * t)),
-                    G = (byte)(from.G + Math.Floor(diffG * t)),
-                    B = (byte)(from.B + Math.Floor(diffB * t)),
+                    A = (byte)easingFunction(from.A, to.A, t),
+                    R = (byte)easingFunction(from.R, to.R, t),
+                    G = (byte)easingFunction(from.G, to.G, t),
+                    B = (byte)easingFunction(from.B, to.B, t),
                 };
 
                 property.SetValue(target, lerpedValue);
