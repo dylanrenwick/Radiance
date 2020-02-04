@@ -24,11 +24,15 @@ namespace RadianceTest.Components
 
         private bool isDirty;
 
+        private bool isMouseGrabbing;
+
         public CityMap(int width, int height, Component parent = null) : base(parent)
         {
             this.map = new Tile[height, width];
-            this.zoomLevel = 1;
+            this.zoomLevel = 10;
             this.isDirty = true;
+            this.map[10, 10] = Tile.Road;
+            this.map[62, 118] = Tile.Road;
         }
 
         public void Draw(RenderContext g)
@@ -57,16 +61,40 @@ namespace RadianceTest.Components
             base.OnMouseScrollDown(e);
         }
 
+        public override void OnMouseDown(MouseEventArgs e)
+        {
+            this.isMouseGrabbing = e.RightButton;
+
+            base.OnMouseDown(e);
+        }
+
+        public override void OnMouseUp(MouseEventArgs e)
+        {
+            this.isMouseGrabbing = e.RightButton;
+
+            base.OnMouseUp(e);
+        }
+
+        public override void OnMouseMove(MouseEventArgs e)
+        {
+            if (this.isMouseGrabbing)
+            {
+                this.Transform.LocalPointPosition += e.MouseDelta;
+            }
+
+            base.OnMouseMove(e);
+        }
+
         private void GenerateTexture(RenderContext g)
         {
-            this.mapTex = new Texture2D(g.GraphicsDevice, this.Width, this.Height, false, SurfaceFormat.Color);
+            this.mapTex = new Texture2D(g.GraphicsDevice, this.Width, this.Height);
 
             var texData = new Color[this.Height * this.Width];
             for (int y = 0; y < this.Height; y++)
             {
                 for (int x = 0; x < this.Width; x++)
                 {
-                    texData[y * this.Height + x] = this.GetTileColor(this.map[y, x]);
+                    texData[y * this.Width + x] = this.GetTileColor(this.map[y, x]);
                 }
             }
 
