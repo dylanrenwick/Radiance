@@ -79,6 +79,18 @@ namespace Radiance
                 this.OnMouseButtonUp?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
             }
 
+            if (this.IsRightButtonDown(mouse))
+            {
+                if (!this.IsRightButtonDown(this.previousMouseState))
+                {
+                    this.OnMouseButtonDown?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
+                }
+            }
+            else if (this.IsRightButtonDown(this.previousMouseState))
+            {
+                this.OnMouseButtonUp?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
+            }
+
             if (mouse.Position != this.previousMouseState.Position)
             {
                 this.OnMouseMove?.Invoke(new MouseEventArgs(mouse, this.previousMouseState));
@@ -100,6 +112,12 @@ namespace Radiance
         {
             if (this.MouseButtonsSwapped) return m.RightButton == ButtonState.Pressed;
             return m.LeftButton == ButtonState.Pressed;
+        }
+
+        private bool IsRightButtonDown(MouseState m)
+        {
+            if (this.MouseButtonsSwapped) return m.LeftButton == ButtonState.Pressed;
+            return m.RightButton == ButtonState.Pressed;
         }
     }
 }
