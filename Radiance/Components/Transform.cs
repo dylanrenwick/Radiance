@@ -27,6 +27,15 @@ namespace Radiance.Components
 
         public Point PointPosition => new Point((int)this.Position.X, (int)this.Position.Y);
 
+        public Point LocalPointPosition
+        {
+            get => new Point((int)this.LocalPosition.X, (int)this.LocalPosition.Y);
+            set
+            {
+                this.LocalPosition = new Vector3(value.ToVector2(), this.LocalPosition.Z);
+            }
+        }
+
         public Transform(Component parent)
         {
             this.Parent = parent;
